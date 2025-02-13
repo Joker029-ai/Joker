@@ -1,57 +1,70 @@
 const videoData = [
   {
-    title: "动画视频 1",
+    title: "AI Landing Page",
     videoUrl: "videos/1.mp4",
-    thumbnail: "images/A.jpg" // 手动设置封面
+    thumbnail: "images/A.jpg",
+    category: "平面",
+    videoId: "019",
+    date: "2025-01-01"
   },
   {
-    title: "动画视频 2",
+    title: "LUONMODELS",
     videoUrl: "videos/1.mp4",
-    thumbnail: "" // 没有封面，使用视频自带的封面
+    thumbnail: "images/A.jpg",
+    category: "物件",
+    videoId: "018",
+    date: "2025-02-15"
   },
   {
-    title: "动画视频 3",
+    title: "Tink Gallery",
     videoUrl: "videos/1.mp4",
-    thumbnail: "" // 没有封面，使用视频自带的封面
+    thumbnail: "",
+    category: "三维",
+    videoId: "017",
+    date: "2025-02-20"
   },
-  // 更多视频项
+  // 更多视频项...
 ];
 
 let currentPage = 1;
-const videosPerPage = 20;
+const videosPerPage = 6;
 
-// 动态加载视频列表
+// 显示视频列表
 function displayVideos(page) {
   const startIndex = (page - 1) * videosPerPage;
   const endIndex = page * videosPerPage;
   const currentVideos = videoData.slice(startIndex, endIndex);
 
   const videoGallery = document.getElementById("video-gallery");
-  videoGallery.innerHTML = ""; // 清空现有的视频项
+  videoGallery.innerHTML = "";
 
   currentVideos.forEach(video => {
     const videoItem = document.createElement("div");
     videoItem.classList.add("video-item");
 
-    // 判断是否有封面，如果没有封面，使用视频的第一帧
-    const thumbnail = video.thumbnail ? video.thumbnail : video.videoUrl;
-
     videoItem.innerHTML = `
-      <div class="video-link" onclick="openVideoModal('${video.videoUrl}')">
-        <video class="video-thumbnail" width="320" height="240" preload="metadata" ${video.thumbnail ? 'style="display:none;"' : ''}>
-          <source src="${video.videoUrl}" type="video/mp4">
-        </video>
-        <img src="${video.thumbnail}" alt="${video.title}" class="thumbnail-img" ${video.thumbnail ? '' : 'style="display:none;"'}>
-        <h3>${video.title}</h3>
+      <div class="video-thumbnail-container">
+        ${video.thumbnail ? 
+          `<img src="${video.thumbnail}" alt="${video.title}" class="thumbnail">` :
+          `<video class="thumbnail" preload="metadata">
+            <source src="${video.videoUrl}#t=0.5" type="video/mp4">
+          </video>`}
+        <div class="category-label">${video.category}</div>
+        <div class="video-id">${video.videoId}</div>
+        <div class="video-name">${video.title}</div>
+        <div class="video-date">${video.date}</div>
       </div>
     `;
+
+    // 绑定点击事件
+    videoItem.addEventListener("click", () => openVideoModal(video.videoUrl));
     videoGallery.appendChild(videoItem);
   });
 
   displayPagination();
 }
 
-// 显示分页
+// 分页逻辑
 function displayPagination() {
   const totalPages = Math.ceil(videoData.length / videosPerPage);
   const pagination = document.getElementById("pagination");
@@ -68,54 +81,67 @@ function displayPagination() {
   }
 }
 
-// 搜索视频
-function searchVideos() {
-  const searchTerm = document.getElementById("search").value.toLowerCase();
-  const filteredVideos = videoData.filter(video => video.title.toLowerCase().includes(searchTerm));
+// 过滤视频
+function filterVideos(category) {
+  const filteredVideos = category === "全部" ? videoData : videoData.filter(video => video.category === category);
   displayFilteredVideos(filteredVideos);
 }
 
+// 显示过滤后的视频
 function displayFilteredVideos(filteredVideos) {
   const videoGallery = document.getElementById("video-gallery");
-  videoGallery.innerHTML = ""; // 清空现有的视频项
+  videoGallery.innerHTML = "";
 
   filteredVideos.forEach(video => {
     const videoItem = document.createElement("div");
     videoItem.classList.add("video-item");
 
-    // 判断是否有封面，如果没有封面，使用视频的第一帧
-    const thumbnail = video.thumbnail ? video.thumbnail : video.videoUrl;
-
     videoItem.innerHTML = `
-      <div class="video-link" onclick="openVideoModal('${video.videoUrl}')">
-        <video class="video-thumbnail" width="320" height="240" preload="metadata" ${video.thumbnail ? 'style="display:none;"' : ''}>
-          <source src="${video.videoUrl}" type="video/mp4">
-        </video>
-        <img src="${video.thumbnail}" alt="${video.title}" class="thumbnail-img" ${video.thumbnail ? '' : 'style="display:none;"'}>
-        <h3>${video.title}</h3>
+      <div class="video-thumbnail-container">
+        ${video.thumbnail ? 
+          `<img src="${video.thumbnail}" alt="${video.title}" class="thumbnail">` :
+          `<video class="thumbnail" preload="metadata">
+            <source src="${video.videoUrl}#t=0.5" type="video/mp4">
+          </video>`}
+        <div class="category-label">${video.category}</div>
+        <div class="video-id">${video.videoId}</div>
+        <div class="video-name">${video.title}</div>
+        <div class="video-date">${video.date}</div>
       </div>
     `;
+
+    videoItem.addEventListener("click", () => openVideoModal(video.videoUrl));
     videoGallery.appendChild(videoItem);
   });
 }
 
-// 弹出视频播放的模态框
+// 打开视频模态框
 function openVideoModal(videoUrl) {
   const modal = document.getElementById("video-modal");
   const modalVideo = document.getElementById("modal-video");
-  modal.style.display = "flex"; // 显示模态框
-  modalVideo.src = videoUrl; // 设置视频源
+  modalVideo.src = videoUrl;
+  modal.classList.add("show");
+  modalVideo.play();
+}
 
-  // 为模态框添加渐变出现的效果
-  modal.classList.add("show-modal");
+// 关闭模态框
+document.getElementById("close-modal").addEventListener("click", () => {
+  const modal = document.getElementById("video-modal");
+  modal.classList.remove("show");
+  document.getElementById("modal-video").pause();
+});
 
-  // 点击关闭按钮时关闭模态框
-  document.getElementById("close-modal").onclick = () => {
-    modal.style.display = "none";
-    modalVideo.pause();
-    modalVideo.src = ''; // 清空视频源，停止播放
-    modal.classList.remove("show-modal"); // 移除动态效果
-  };
+document.getElementById("video-modal").addEventListener("click", (e) => {
+  if (e.target === document.getElementById("video-modal")) {
+    document.getElementById("video-modal").classList.remove("show");
+    document.getElementById("modal-video").pause();
+  }
+});
+
+// 切换主题
+function toggleTheme() {
+  const body = document.body;
+  body.classList.toggle("dark-theme");
 }
 
 // 初始化页面
