@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>博客文章</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 公共头部 -->
+  <header>
+    <div class="header-left">
+      <img src="images/A.jpg" alt="头像" class="avatar">
+      <h1>Rico</h1>
+    </div>
+    <div class="header-right">
+      <nav>
+        <ul>
+          <li><a href="index.html">首页</a></li>
+          <li><a href="blog.html" class="nav-active">博客</a></li>
+          <li><a href="about.html">关于</a></li>
+        </ul>
+      </nav>
+      <div class="theme-toggle-container">
+        <label for="theme-toggle" class="theme-toggle-label">白天/黑夜</label>
+        <input type="checkbox" id="theme-toggle" onclick="toggleTheme()">
+      </div>
+    </div>
+  </header>
+
+  <!-- 博客展示 -->
+  <section class="hero">
+    <h2>博客文章</h2>
+    <p>记录我的思考与创作，分享设计和技术的心得。</p>
+  </section>
+
+  <!-- 文章列表 -->
+  <section class="article-list">
+    <div class="article-item">
+      <div class="article-info">
+        <h3>前端开发最佳实践</h3>
+        <span class="article-date">2025-03-01</span>
+      </div>
+      <div class="article-arrow">→</div>
+    </div>
+    <div class="article-item">
+      <div class="article-info">
+        <h3>设计思维方法论</h3>
+        <span class="article-date">2025-02-20</span>
+      </div>
+      <div class="article-arrow">→</div>
+    </div>
+    <!-- 更多文章项 -->
+  </section>
+
+  <!-- 页脚 -->
+  <footer>
+    <p>&copy; 2025 Rico作品集. 保留所有权利</p>
+  </footer>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
