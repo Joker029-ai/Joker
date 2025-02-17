@@ -1,72 +1,148 @@
-const videoData = [
+const contentData = [
   {
+    type: "video",
     title: "AI Landing Page",
-    videoUrl: "videos/1.mp4",
+    contentUrl: "videos/1.mp4",
     thumbnail: "images/A.jpg",
-    category: "平面",
-    videoId: "001",
+    category: "三维",
+    contentId: "001",
     date: "2025-01-01"
   },
   {
-    title: "LUONMODELS",
-    videoUrl: "videos/1.mp4",
+    type: "image",
+    title: "产品设计图集",
+    contentUrl: ["images/A.jpg", "images/A.jpg"],
     thumbnail: "images/A.jpg",
-    category: "物件",
-    videoId: "002",
+    category: "物料",
+    contentId: "002",
     date: "2025-02-15"
   },
-  {
-    title: "Tink Gallery",
-    videoUrl: "videos/1.mp4",
+    {
+    type: "video",
+    title: "模型展示",
+    contentUrl: "videos/1.mp4",
     thumbnail: "",
     category: "三维",
-    videoId: "003",
-    date: "2025-02-20"
+    contentId: "003",
+    date: "2025-01-01"
   },
-  // 更多视频项...
+    {
+    type: "image",
+    title: "摄影图集",
+    contentUrl: ["images/A.jpg", "images/A.jpg"],
+    thumbnail: "images/A.jpg",
+    category: "摄影",
+    contentId: "004",
+    date: "2025-02-15"
+  },
+  
+/*文案模块
+  {
+    type: "article",
+    title: "设计思维方法论",
+    content: "设计思维的核心在于...",
+    thumbnail: "images/A.jpg",
+    category: "AI",
+    contentId: "001",
+    date: "2025-02-20"
+  }
+*/
+
 ];
 
 let currentPage = 1;
-const videosPerPage = 6;
+const itemsPerPage = 6;
+let currentCategory = "全部";
 
-// 显示视频列表
-function displayVideos(page) {
-  const startIndex = (page - 1) * videosPerPage;
-  const endIndex = page * videosPerPage;
-  const currentVideos = videoData.slice(startIndex, endIndex);
+// 初始化页面
+function initPage() {
+  if (document.getElementById("content-gallery")) {
+    displayContent(currentPage, currentCategory);
+  }
+  setupModal();
+  setupTheme();
+}
 
-  const videoGallery = document.getElementById("video-gallery");
-  videoGallery.innerHTML = "";
+// 显示内容
+function displayContent(page, category) {
+  const filteredData = category === "全部" ? contentData : contentData.filter(item => item.category === category);
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = page * itemsPerPage;
+  const currentItems = filteredData.slice(startIndex, endIndex);
 
-  currentVideos.forEach(video => {
-    const videoItem = document.createElement("div");
-    videoItem.classList.add("video-item");
+  const contentGallery = document.getElementById("content-gallery");
+  contentGallery.innerHTML = "";
 
-    videoItem.innerHTML = `
-      <div class="video-thumbnail-container">
-        ${video.thumbnail ? 
-          `<img src="${video.thumbnail}" alt="${video.title}" class="thumbnail">` :
-          `<video class="thumbnail" preload="metadata">
-            <source src="${video.videoUrl}#t=0.5" type="video/mp4">
-          </video>`}
-        <div class="category-label">${video.category}</div>
-        <div class="video-id">${video.videoId}</div>
-        <div class="video-name">${video.title}</div>
-        <div class="video-date">${video.date}</div>
-      </div>
-    `;
-
-    // 绑定点击事件
-    videoItem.addEventListener("click", () => openVideoModal(video.videoUrl));
-    videoGallery.appendChild(videoItem);
+  currentItems.forEach(item => {
+    const contentItem = renderContentItem(item);
+    contentGallery.appendChild(contentItem);
   });
 
-  displayPagination();
+  displayPagination(filteredData.length);
+}
+
+// 渲染内容项
+function renderContentItem(item) {
+  const container = document.createElement("div");
+  container.className = `content-item ${item.type}-item`;
+  container.dataset.contentId = item.contentId;
+
+  let mediaContent = '';
+  if (item.type === 'video') {
+    mediaContent = `<video class="thumbnail" preload="metadata">
+      <source src="${item.contentUrl}#t=0.5" type="video/mp4">
+    </video>`;
+  } else if (item.type === 'image') {
+    mediaContent = `<img src="${item.thumbnail}" alt="${item.title}" class="thumbnail">`;
+  } else {
+    mediaContent = `<img src="${item.thumbnail}" alt="${item.title}" class="thumbnail">`;
+  }
+
+  container.innerHTML = `
+    <div class="content-thumbnail">
+      ${mediaContent}
+      <div class="category-label">${item.category}</div>
+      <div class="content-id">${item.contentId}</div>
+    </div>
+    <div class="content-info">
+      <h3>${item.title}</h3>
+      <span class="content-date">${item.date}</span>
+    </div>
+  `;
+
+  container.addEventListener("click", () => handleContentClick(item));
+  return container;
+}
+
+// 处理内容点击
+function handleContentClick(content) {
+  const modal = document.getElementById("content-modal");
+  const modalBody = document.getElementById("modal-body");
+  
+  let modalContent = '';
+  switch(content.type) {
+    case 'video':
+      modalContent = `<video controls autoplay>
+        <source src="${content.contentUrl}" type="video/mp4">
+      </video>`;
+      break;
+    case 'image':
+      modalContent = content.contentUrl.map(img => `
+        <img src="${img}" class="modal-image">
+      `).join('');
+      break;
+    case 'article':
+      modalContent = `<div class="article-content">${content.content}</div>`;
+      break;
+  }
+
+  modalBody.innerHTML = modalContent;
+  modal.classList.add("show");
 }
 
 // 分页逻辑
-function displayPagination() {
-  const totalPages = Math.ceil(videoData.length / videosPerPage);
+function displayPagination(totalItems) {
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
   const pagination = document.getElementById("pagination");
   pagination.innerHTML = "";
 
@@ -75,74 +151,58 @@ function displayPagination() {
     button.textContent = i;
     button.onclick = () => {
       currentPage = i;
-      displayVideos(currentPage);
+      displayContent(currentPage, currentCategory);
     };
     pagination.appendChild(button);
   }
 }
 
-// 过滤视频
-function filterVideos(category) {
-  const filteredVideos = category === "全部" ? videoData : videoData.filter(video => video.category === category);
-  displayFilteredVideos(filteredVideos);
+// 分类筛选
+function filterContent(category) {
+  currentCategory = category;
+  currentPage = 1;
+  displayContent(currentPage, currentCategory);
 }
 
-// 显示过滤后的视频
-function displayFilteredVideos(filteredVideos) {
-  const videoGallery = document.getElementById("video-gallery");
-  videoGallery.innerHTML = "";
+// 设置模态框
+function setupModal() {
+  const modal = document.getElementById("content-modal");
+  const closeModal = document.querySelector(".close-modal");
 
-  filteredVideos.forEach(video => {
-    const videoItem = document.createElement("div");
-    videoItem.classList.add("video-item");
+  closeModal.addEventListener("click", () => {
+    modal.classList.remove("show");
+    const video = modal.querySelector("video");
+    if (video) {
+      video.pause();
+    }
+  });
 
-    videoItem.innerHTML = `
-      <div class="video-thumbnail-container">
-        ${video.thumbnail ? 
-          `<img src="${video.thumbnail}" alt="${video.title}" class="thumbnail">` :
-          `<video class="thumbnail" preload="metadata">
-            <source src="${video.videoUrl}#t=0.5" type="video/mp4">
-          </video>`}
-        <div class="category-label">${video.category}</div>
-        <div class="video-id">${video.videoId}</div>
-        <div class="video-name">${video.title}</div>
-        <div class="video-date">${video.date}</div>
-      </div>
-    `;
-
-    videoItem.addEventListener("click", () => openVideoModal(video.videoUrl));
-    videoGallery.appendChild(videoItem);
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.classList.remove("show");
+      const video = modal.querySelector("video");
+      if (video) {
+        video.pause();
+      }
+    }
   });
 }
 
-// 打开视频模态框
-function openVideoModal(videoUrl) {
-  const modal = document.getElementById("video-modal");
-  const modalVideo = document.getElementById("modal-video");
-  modalVideo.src = videoUrl;
-  modal.classList.add("show");
-  modalVideo.play();
-}
+// 设置主题
+function setupTheme() {
+  const themeToggle = document.getElementById("theme-toggle");
+  const savedTheme = localStorage.getItem("theme");
 
-// 关闭模态框
-document.getElementById("close-modal").addEventListener("click", () => {
-  const modal = document.getElementById("video-modal");
-  modal.classList.remove("show");
-  document.getElementById("modal-video").pause();
-});
-
-document.getElementById("video-modal").addEventListener("click", (e) => {
-  if (e.target === document.getElementById("video-modal")) {
-    document.getElementById("video-modal").classList.remove("show");
-    document.getElementById("modal-video").pause();
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark-theme");
+    themeToggle.checked = true;
   }
-});
 
-// 切换主题
-function toggleTheme() {
-  const body = document.body;
-  body.classList.toggle("dark-theme");
+  themeToggle.addEventListener("change", () => {
+    document.body.classList.toggle("dark-theme");
+    localStorage.setItem("theme", document.body.classList.contains("dark-theme") ? "dark" : "light");
+  });
 }
 
-// 初始化页面
-displayVideos(currentPage);
+// 初始化
+document.addEventListener("DOMContentLoaded", initPage);
