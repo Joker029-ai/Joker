@@ -16,9 +16,9 @@
     <div class="header-right">
       <nav>
         <ul>
-          <li><a href="#">首页</a></li>
-          <li><a href="#">博客</a></li>
-          <li><a href="#">关于</a></li>
+          <li><a href="index.html" class="nav-active">首页</a></li>
+          <li><a href="blog.html">博客</a></li>
+          <li><a href="about.html">关于</a></li>
         </ul>
       </nav>
       <div class="theme-toggle-container">
@@ -36,29 +36,26 @@
 
   <!-- 分类标签 -->
   <section class="categories">
-    <button onclick="filterVideos('全部')" class="category-btn">全部</button>
-    <button onclick="filterVideos('平面')" class="category-btn">平面</button>
-    <button onclick="filterVideos('物件')" class="category-btn">物件</button>
-    <button onclick="filterVideos('三维')" class="category-btn">三维</button>
-    <button onclick="filterVideos('摄影')" class="category-btn">摄影</button>
-    <button onclick="filterVideos('白膜')" class="category-btn">白膜</button>
-    <button onclick="filterVideos('上色')" class="category-btn">上色</button>
+    <button onclick="filterContent('全部')" class="category-btn">全部</button>
+    <button onclick="filterContent('平面')" class="category-btn">平面</button>
+    <button onclick="filterContent('物料')" class="category-btn">物料</button>
+    <button onclick="filterContent('三维')" class="category-btn">三维</button>
+    <button onclick="filterContent('摄影')" class="category-btn">摄影</button>
+    <button onclick="filterContent('AI')" class="category-btn">AI</button>
+    <button onclick="filterContent('其他')" class="category-btn">其他</button>
   </section>
 
-  <!-- 视频列表 -->
-  <section class="video-gallery" id="video-gallery"></section>
+  <!-- 内容列表 -->
+  <section class="content-gallery" id="content-gallery"></section>
 
   <!-- 分页 -->
   <div class="pagination" id="pagination"></div>
 
-  <!-- 视频模态框 -->
-  <div id="video-modal">
+  <!-- 模态框 -->
+  <div id="content-modal" class="modal">
     <div class="modal-content">
-      <span id="close-modal">&times;</span>
-      <video id="modal-video" controls>
-        <source src="" type="video/mp4">
-        您的浏览器不支持视频播放。
-      </video>
+      <span class="close-modal">&times;</span>
+      <div id="modal-body"></div>
     </div>
   </div>
 
