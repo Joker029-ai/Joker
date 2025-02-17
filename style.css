@@ -31,7 +31,7 @@ header {
 }
 
 .dark-theme header {
-  background-color: #222;
+/*  background-color: #222;*/
   color: #fff;
 }
 
@@ -354,7 +354,7 @@ footer {
 }
 
 .dark-theme footer {
-  background-color: #222;
+/*  background-color: #222;*/
   color: #fff;
 }
 
