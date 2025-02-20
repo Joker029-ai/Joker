@@ -2,56 +2,142 @@ const contentData = [
   {
     type: "video",
     title: "AI Landing Page",
-    contentUrl: "videos/1.mp4",
+    contentUrl: "videos/001.mp4",
     thumbnail: "images/A.jpg",
     category: "三维",
-    contentId: "001",
+    contentId: "NO.001",
     date: "2025-01-01"
   },
   {
     type: "image",
     title: "产品设计图集",
-    contentUrl: ["images/A.jpg", "images/A.jpg"],
-    thumbnail: "images/A.jpg",
+    contentUrl: ["images/DJI Inspire1.jpg", "images/DJI Inspire1-02.jpg","images/DJI Inspire1-03.jpg","images/DJI Inspire1遥控器.jpg","images/DJI Inspire1遥控器-2.jpg","images/DJI Inspire1遥控器-3.jpg"],
+    thumbnail: "images/DJI Inspire1.jpg",
     category: "物料",
-    contentId: "002",
+    contentId: "NO.002",
+    date: "2025-02-15"
+  },
+  {
+    type: "video",
+    title: "模型展示",
+    contentUrl: "videos/002.mp4",
+    thumbnail: "",
+    category: "三维",
+    contentId: "NO.003",
+    date: "2025-01-01"
+  },
+  {
+    type: "image",
+    title: "摄影图集",
+    contentUrl: ["images/GoPro运动相机.jpg", "images/音响.jpg", "images/游戏机小场景.jpg"],
+    thumbnail: "images/GoPro运动相机.jpg",
+    category: "摄影",
+    contentId: "NO.004",
     date: "2025-02-15"
   },
     {
     type: "video",
-    title: "模型展示",
-    contentUrl: "videos/1.mp4",
-    thumbnail: "",
+    title: "AI Landing Page",
+    contentUrl: "videos/003.mp4",
+    thumbnail: "images/A.jpg",
     category: "三维",
-    contentId: "003",
+    contentId: "NO.005",
+    date: "2025-01-01"
+  },
+      {
+    type: "video",
+    title: "AI Landing Page",
+    contentUrl: "videos/004.mp4",
+    thumbnail: "images/A.jpg",
+    category: "三维",
+    contentId: "NO.006",
+    date: "2025-01-01"
+  },
+      {
+    type: "video",
+    title: "AI Landing Page",
+    contentUrl: "videos/005.mp4",
+    thumbnail: "images/A.jpg",
+    category: "三维",
+    contentId: "NO.007",
+    date: "2025-01-01"
+  },
+      {
+    type: "video",
+    title: "AI Landing Page",
+    contentUrl: "videos/006.mp4",
+    thumbnail: "images/A.jpg",
+    category: "三维",
+    contentId: "NO.008",
     date: "2025-01-01"
   },
     {
     type: "image",
     title: "摄影图集",
-    contentUrl: ["images/A.jpg", "images/A.jpg"],
-    thumbnail: "images/A.jpg",
+    contentUrl: ["images/布料结构特写.jpg", "images/超哑面电子产品.jpg", "images/手持吸尘器.jpg"],
+    thumbnail: "images/布料结构特写.jpg",
     category: "摄影",
-    contentId: "004",
+    contentId: "NO.009",
     date: "2025-02-15"
   },
-  
-/*文案模块
-  {
-    type: "article",
-    title: "设计思维方法论",
-    content: "设计思维的核心在于...",
+        {
+    type: "video",
+    title: "AI Landing Page",
+    contentUrl: "videos/007.mp4",
     thumbnail: "images/A.jpg",
-    category: "AI",
-    contentId: "001",
-    date: "2025-02-20"
-  }
-*/
-
+    category: "三维",
+    contentId: "NO.010",
+    date: "2025-01-01"
+  },
+        {
+    type: "video",
+    title: "AI Landing Page",
+    contentUrl: "videos/008.mp4",
+    thumbnail: "images/A.jpg",
+    category: "三维",
+    contentId: "NO.011",
+    date: "2025-01-01"
+  },
+        {
+    type: "video",
+    title: "AI Landing Page",
+    contentUrl: "videos/009.mp4",
+    thumbnail: "images/A.jpg",
+    category: "三维",
+    contentId: "NO.012",
+    date: "2025-01-01"
+  },
+      {
+    type: "image",
+    title: "平面图",
+    contentUrl: ["images/大黄蜂.jpg", "images/远古生物.png"],
+    thumbnail: "images/大黄蜂.jpg",
+    category: "平面",
+    contentId: "NO.013",
+    date: "2025-02-15"
+  },
+          {
+    type: "video",
+    title: "AI Landing Page",
+    contentUrl: "videos/010.mp4",
+    thumbnail: "images/A.jpg",
+    category: "三维",
+    contentId: "NO.014",
+    date: "2025-01-01"
+  },
+      {
+    type: "image",
+    title: "摄影图集",
+    contentUrl: ["images/森林小屋.jpg", "images/多功能锅.jpg", "images/复古调蓝牙音箱.jpg"],
+    thumbnail: "images/森林小屋.jpg",
+    category: "摄影",
+    contentId: "NO.015",
+    date: "2025-02-15"
+  },
 ];
 
 let currentPage = 1;
-const itemsPerPage = 6;
+let itemsPerPage = 12; // 允许用户手动设置每页显示的项数
 let currentCategory = "全部";
 
 // 初始化页面
@@ -61,6 +147,7 @@ function initPage() {
   }
   setupModal();
   setupTheme();
+  setupCategoryButtons();
 }
 
 // 显示内容
@@ -101,7 +188,7 @@ function renderContentItem(item) {
   container.innerHTML = `
     <div class="content-thumbnail">
       ${mediaContent}
-      <div class="category-label">${item.category}</div>
+      <div class="category-label" style="background-color: ${getCategoryColor(item.category)};">${item.category}</div>
       <div class="content-id">${item.contentId}</div>
     </div>
     <div class="content-info">
@@ -118,7 +205,7 @@ function renderContentItem(item) {
 function handleContentClick(content) {
   const modal = document.getElementById("content-modal");
   const modalBody = document.getElementById("modal-body");
-  
+
   let modalContent = '';
   switch(content.type) {
     case 'video':
@@ -162,6 +249,54 @@ function filterContent(category) {
   currentCategory = category;
   currentPage = 1;
   displayContent(currentPage, currentCategory);
+  updateCategoryButtons(category);
+}
+
+// 设置分类按钮
+function setupCategoryButtons() {
+  const buttons = document.querySelectorAll(".category-btn");
+  buttons.forEach(button => {
+    const color = button.getAttribute("data-color");
+    button.style.setProperty("--btn-color", color);
+    button.addEventListener("mouseenter", () => {
+      button.style.backgroundColor = color;
+    });
+    button.addEventListener("mouseleave", () => {
+      if (!button.classList.contains("active")) {
+        button.style.backgroundColor = "#656565";
+      }
+    });
+    button.addEventListener("click", () => {
+      buttons.forEach(btn => btn.classList.remove("active"));
+      button.classList.add("active");
+      button.style.backgroundColor = color;
+    });
+  });
+}
+
+// 更新分类按钮状态
+function updateCategoryButtons(category) {
+  const buttons = document.querySelectorAll(".category-btn");
+  buttons.forEach(button => {
+    if (button.textContent === category) {
+      button.classList.add("active");
+      button.style.backgroundColor = button.getAttribute("data-color");
+    } else {
+      button.classList.remove("active");
+      button.style.backgroundColor = "#656565";
+    }
+  });
+}
+
+// 获取分类颜色
+function getCategoryColor(category) {
+  const buttons = document.querySelectorAll(".category-btn");
+  for (const button of buttons) {
+    if (button.textContent === category) {
+      return button.getAttribute("data-color");
+    }
+  }
+  return "#656565";
 }
 
 // 设置模态框
