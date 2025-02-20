@@ -26,12 +26,9 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-/*  background-color: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);*/
 }
 
 .dark-theme header {
-/*  background-color: #222;*/
   color: #fff;
 }
 
@@ -52,6 +49,12 @@ h1 {
   font-weight: normal;
 }
 
+.header-right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .header-right nav ul {
   display: flex;
   gap: 20px;
@@ -59,6 +62,7 @@ h1 {
 
 .header-right nav ul li {
   list-style: none;
+  margin-right: 30px;
 }
 
 .header-right nav ul li a {
@@ -78,7 +82,14 @@ h1 {
 }
 
 .theme-toggle-label {
-  font-size: 1rem;
+  font-size: 1.3rem;
+}
+
+.yuankuang {
+  width: 53px;
+  height: 25px;
+  border: 2px solid #727272;
+  border-radius: 50px / 50px;
 }
 
 #theme-toggle {
@@ -101,10 +112,10 @@ h1 {
 #theme-toggle::before {
   content: '';
   position: absolute;
-  top: 4px;
-  left: 4px;
-  width: 22px;
-  height: 22px;
+  top: 3px;
+  left: 3px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   background-color: #838383;
   transition: left 0.3s ease;
@@ -118,17 +129,18 @@ h1 {
 
 .hero h2 {
   font-size: 2.5rem;
+  margin-top: 20px;
 }
 
 .hero p {
   font-size: 1.2rem;
-  margin-top: 10px;
+  margin-top: 50px;
 }
 
 /* 分类标签 */
 .categories {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 100px;
 }
 
 .category-btn {
@@ -143,8 +155,9 @@ h1 {
   transition: background-color 0.3s ease;
 }
 
-.category-btn:hover {
-  background-color: #56becf;
+.category-btn:hover,
+.category-btn.active {
+  background-color: var(--btn-color);
 }
 
 /* 内容列表 */
@@ -157,7 +170,7 @@ h1 {
 
 .content-item {
   background-color: white;
-  padding: 15px;
+  padding: 40px 5px 10px 5px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
@@ -187,8 +200,8 @@ h1 {
 
 .category-label {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: -35px;
+  left: 0px;
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   padding: 5px;
@@ -197,12 +210,12 @@ h1 {
 
 .content-id {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: -35px;
+  right: 0px;
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   padding: 5px;
-  border-radius: 5px;
+  border-radius: 30px;
 }
 
 .content-info {
@@ -264,7 +277,7 @@ h1 {
 .modal-content {
   background-color: white;
   width: 80%;
-  max-width: 800px;
+  max-width: 1000px;
   padding: 20px;
   border-radius: 10px;
   position: relative;
@@ -305,7 +318,7 @@ h1 {
 /* 博客页面 */
 .article-list {
   max-width: 800px;
-  margin: 40px 280px;
+  margin: 40px auto;
   padding: 0 20px;
 }
 
@@ -349,12 +362,9 @@ footer {
   margin-top: auto;
   text-align: center;
   padding: 20px;
-/*  background-color: white;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);*/
 }
 
 .dark-theme footer {
-/*  background-color: #222;*/
   color: #fff;
 }
 
@@ -363,9 +373,14 @@ footer {
   .content-gallery {
     grid-template-columns: 1fr;
   }
-  
+
   .header-right {
     flex-direction: column;
     align-items: flex-end;
+  }
+
+  .header-right nav ul {
+    flex-direction: column;
+    gap: 10px;
   }
 }
