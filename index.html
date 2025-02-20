@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rico作品集</title>
+  <title>HughBor作品集</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- 公共头部 -->
   <header>
     <div class="header-left">
-      <img src="images/A.jpg" alt="头像" class="avatar">
-      <h1>Rico</h1>
+      <img src="images/H.jpg" alt="头像" class="avatar">
+      <h1>HughBor</h1>
     </div>
     <div class="header-right">
       <nav>
@@ -22,27 +22,29 @@
         </ul>
       </nav>
       <div class="theme-toggle-container">
-        <label for="theme-toggle" class="theme-toggle-label">白天/黑夜</label>
-        <input type="checkbox" id="theme-toggle" onclick="toggleTheme()">
+        <label for="theme-toggle" class="theme-toggle-label">☀/☽</label>
+        <div class="yuankuang">
+          <input type="checkbox" id="theme-toggle" onclick="toggleTheme()">
+        </div>
       </div>
     </div>
   </header>
 
   <!-- 首页展示 -->
   <section class="hero">
-    <h2>作品集</h2>
-    <p>探索我的设计与创作，这里汇集了我的各种项目和作品。</p>
+    <h2>欢迎您来到我的作品网站</h2>
+    <p>我是HughBor，一名喜欢设计的“渣渣级”电商设计师，<br>目前在工作中的重心都在跨境平台（绝大部分是亚马逊，独立站，沃尔玛等~），<br>自己对自己的定位是平面为主，三维为辅，尽一切技能服务于终端视觉呈现。<br>探索我的设计与创作，这里汇集了我的各种项目和作品。</p>
   </section>
 
   <!-- 分类标签 -->
   <section class="categories">
-    <button onclick="filterContent('全部')" class="category-btn">全部</button>
-    <button onclick="filterContent('平面')" class="category-btn">平面</button>
-    <button onclick="filterContent('物料')" class="category-btn">物料</button>
-    <button onclick="filterContent('三维')" class="category-btn">三维</button>
-    <button onclick="filterContent('摄影')" class="category-btn">摄影</button>
-    <button onclick="filterContent('AI')" class="category-btn">AI</button>
-    <button onclick="filterContent('其他')" class="category-btn">其他</button>
+    <button onclick="filterContent('全部')" class="category-btn" data-color="#656565">全部</button>
+    <button onclick="filterContent('平面')" class="category-btn" data-color="#FF5733">平面</button>
+    <button onclick="filterContent('物料')" class="category-btn" data-color="#33FF57">物料</button>
+    <button onclick="filterContent('三维')" class="category-btn" data-color="#3357FF">三维</button>
+    <button onclick="filterContent('摄影')" class="category-btn" data-color="#FF33A1">摄影</button>
+    <button onclick="filterContent('AI')" class="category-btn" data-color="#A133FF">AI</button>
+    <button onclick="filterContent('其他')" class="category-btn" data-color="#33FFF5">其他</button>
   </section>
 
   <!-- 内容列表 -->
@@ -61,7 +63,7 @@
 
   <!-- 页脚 -->
   <footer>
-    <p>&copy; 2025 Rico作品集. 保留所有权利</p>
+    <p>&copy; 2025 HughBor作品集. 保留所有权利</p>
   </footer>
 
   <script src="scripts.js"></script>
