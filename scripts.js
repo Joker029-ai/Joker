@@ -35,7 +35,7 @@ const contentData = [
     contentId: "NO.004",
     date: "2025-02-15"
   },
-    {
+  {
     type: "video",
     title: "AI Landing Page",
     contentUrl: "videos/003.mp4",
@@ -44,7 +44,7 @@ const contentData = [
     contentId: "NO.005",
     date: "2025-01-01"
   },
-      {
+  {
     type: "video",
     title: "AI Landing Page",
     contentUrl: "videos/004.mp4",
@@ -53,7 +53,7 @@ const contentData = [
     contentId: "NO.006",
     date: "2025-01-01"
   },
-      {
+  {
     type: "video",
     title: "AI Landing Page",
     contentUrl: "videos/005.mp4",
@@ -62,7 +62,7 @@ const contentData = [
     contentId: "NO.007",
     date: "2025-01-01"
   },
-      {
+  {
     type: "video",
     title: "AI Landing Page",
     contentUrl: "videos/006.mp4",
@@ -71,7 +71,7 @@ const contentData = [
     contentId: "NO.008",
     date: "2025-01-01"
   },
-    {
+  {
     type: "image",
     title: "摄影图集",
     contentUrl: ["images/布料结构特写.jpg", "images/超哑面电子产品.jpg", "images/手持吸尘器.jpg"],
@@ -80,7 +80,7 @@ const contentData = [
     contentId: "NO.009",
     date: "2025-02-15"
   },
-        {
+  {
     type: "video",
     title: "AI Landing Page",
     contentUrl: "videos/007.mp4",
@@ -89,7 +89,7 @@ const contentData = [
     contentId: "NO.010",
     date: "2025-01-01"
   },
-        {
+  {
     type: "video",
     title: "AI Landing Page",
     contentUrl: "videos/008.mp4",
@@ -98,7 +98,7 @@ const contentData = [
     contentId: "NO.011",
     date: "2025-01-01"
   },
-        {
+  {
     type: "video",
     title: "AI Landing Page",
     contentUrl: "videos/009.mp4",
@@ -107,7 +107,7 @@ const contentData = [
     contentId: "NO.012",
     date: "2025-01-01"
   },
-      {
+  {
     type: "image",
     title: "平面图",
     contentUrl: ["images/大黄蜂.jpg", "images/远古生物.png"],
@@ -116,7 +116,7 @@ const contentData = [
     contentId: "NO.013",
     date: "2025-02-15"
   },
-          {
+  {
     type: "video",
     title: "AI Landing Page",
     contentUrl: "videos/010.mp4",
@@ -125,7 +125,7 @@ const contentData = [
     contentId: "NO.014",
     date: "2025-01-01"
   },
-      {
+  {
     type: "image",
     title: "摄影图集",
     contentUrl: ["images/森林小屋.jpg", "images/多功能锅.jpg", "images/复古调蓝牙音箱.jpg"],
@@ -137,97 +137,139 @@ const contentData = [
 ];
 
 let currentPage = 1;
-let itemsPerPage = 12; // 允许用户手动设置每页显示的项数
+let itemsPerPage = 10;
 let currentCategory = "全部";
 
-// 初始化页面
-function initPage() {
-  if (document.getElementById("content-gallery")) {
-    displayContent(currentPage, currentCategory);
-  }
-  setupModal();
-  setupTheme();
-  setupCategoryButtons();
-}
+/* ================= 全局主题系统 ================= */
+const THEME_KEY = "hughbor_theme";
 
-// 显示内容
-function displayContent(page, category) {
-  const filteredData = category === "全部" ? contentData : contentData.filter(item => item.category === category);
-  const startIndex = (page - 1) * itemsPerPage;
-  const endIndex = page * itemsPerPage;
-  const currentItems = filteredData.slice(startIndex, endIndex);
-
-  const contentGallery = document.getElementById("content-gallery");
-  contentGallery.innerHTML = "";
-
-  currentItems.forEach(item => {
-    const contentItem = renderContentItem(item);
-    contentGallery.appendChild(contentItem);
+// 强制同步主题到所有元素
+function syncTheme() {
+  const savedTheme = localStorage.getItem(THEME_KEY) || "light";
+  const isDarkMode = savedTheme === "dark";
+  
+  // 设置body主题类
+  document.body.classList.toggle("dark-theme", isDarkMode);
+  
+  // 同步所有页面切换按钮状态
+  const themeToggles = document.querySelectorAll("#theme-toggle");
+  themeToggles.forEach(toggle => {
+    toggle.checked = isDarkMode;
   });
 
+  // 同步导航链接颜色
+  document.querySelectorAll("nav a").forEach(link => {
+    link.style.color = isDarkMode ? "#fff" : "#333";
+  });
+
+  // 同步页脚颜色
+  document.querySelectorAll("footer").forEach(footer => {
+    footer.style.color = isDarkMode ? "#fff" : "inherit";
+  });
+}
+
+// 初始化主题系统
+function initThemeSystem() {
+  const themeToggles = document.querySelectorAll("#theme-toggle");
+  
+  // 初始化主题状态
+  if (!localStorage.getItem(THEME_KEY)) {
+    localStorage.setItem(THEME_KEY, "light");
+  }
+  
+  // 绑定切换事件
+  themeToggles.forEach(toggle => {
+    toggle.addEventListener("change", (e) => {
+      const newTheme = e.target.checked ? "dark" : "light";
+      localStorage.setItem(THEME_KEY, newTheme);
+      syncTheme();
+      
+      // 强制同步模态框主题
+      const modal = document.getElementById("content-modal");
+      if (modal) {
+        modal.classList.toggle("dark-theme", newTheme === "dark");
+      }
+    });
+  });
+}
+
+/* ================= 全局初始化 ================= */
+function initCommon() {
+  // 初始化主题系统
+  initThemeSystem();
+  syncTheme();
+
+  // 解决主题闪烁问题
+  document.body.style.visibility = "visible";
+}
+
+/* ================= 首页功能 ================= */
+function displayContent(page, category) {
+  const filteredData = category === "全部" 
+    ? contentData 
+    : contentData.filter(item => item.category === category);
+  
+  const startIndex = (page - 1) * itemsPerPage;
+  const currentItems = filteredData.slice(startIndex, startIndex + itemsPerPage);
+
+  const gallery = document.getElementById("content-gallery");
+  gallery.innerHTML = currentItems.map(item => `
+    <div class="content-item ${item.type}-item" data-id="${item.contentId}">
+      <div class="content-thumbnail">
+        ${item.type === 'video' ? `
+          <video class="thumbnail" preload="metadata">
+            <source src="${item.contentUrl}#t=0.5" type="video/mp4">
+          </video>
+        ` : `
+          <img src="${item.thumbnail}" class="thumbnail" alt="${item.title}">
+        `}
+        <div class="category-label">${item.category}</div>
+        <div class="content-id">${item.contentId}</div>
+      </div>
+      <div class="content-info">
+        <h3>${item.title}</h3>
+        <span class="content-date">${item.date}</span>
+      </div>
+    </div>
+  `).join("");
+
+  initContentItemsInteraction();
   displayPagination(filteredData.length);
 }
 
-// 渲染内容项
-function renderContentItem(item) {
-  const container = document.createElement("div");
-  container.className = `content-item ${item.type}-item`;
-  container.dataset.contentId = item.contentId;
-
-  let mediaContent = '';
-  if (item.type === 'video') {
-    mediaContent = `<video class="thumbnail" preload="metadata">
-      <source src="${item.contentUrl}#t=0.5" type="video/mp4">
-    </video>`;
-  } else if (item.type === 'image') {
-    mediaContent = `<img src="${item.thumbnail}" alt="${item.title}" class="thumbnail">`;
-  } else {
-    mediaContent = `<img src="${item.thumbnail}" alt="${item.title}" class="thumbnail">`;
-  }
-
-  container.innerHTML = `
-    <div class="content-thumbnail">
-      ${mediaContent}
-      <div class="category-label" style="background-color: ${getCategoryColor(item.category)};">${item.category}</div>
-      <div class="content-id">${item.contentId}</div>
-    </div>
-    <div class="content-info">
-      <h3>${item.title}</h3>
-      <span class="content-date">${item.date}</span>
-    </div>
-  `;
-
-  container.addEventListener("click", () => handleContentClick(item));
-  return container;
+function initContentItemsInteraction() {
+  document.querySelectorAll(".content-item").forEach(item => {
+    item.addEventListener("click", () => {
+      const contentId = item.dataset.id;
+      const content = contentData.find(c => c.contentId === contentId);
+      showContentModal(content);
+    });
+  });
 }
 
-// 处理内容点击
-function handleContentClick(content) {
+function showContentModal(content) {
   const modal = document.getElementById("content-modal");
   const modalBody = document.getElementById("modal-body");
-
-  let modalContent = '';
-  switch(content.type) {
-    case 'video':
-      modalContent = `<video controls autoplay>
-        <source src="${content.contentUrl}" type="video/mp4">
-      </video>`;
-      break;
-    case 'image':
-      modalContent = content.contentUrl.map(img => `
-        <img src="${img}" class="modal-image">
-      `).join('');
-      break;
-    case 'article':
-      modalContent = `<div class="article-content">${content.content}</div>`;
-      break;
+  
+  let contentHTML = "";
+  if (content.type === "video") {
+    contentHTML = `<video controls autoplay><source src="${content.contentUrl}"></video>`;
+  } else {
+    contentHTML = content.contentUrl.map(url => 
+      `<img src="${url}" class="modal-image">`
+    ).join("");
   }
-
-  modalBody.innerHTML = modalContent;
+  
+  modalBody.innerHTML = contentHTML;
   modal.classList.add("show");
+  
+  // 同步模态框主题
+  modal.classList.toggle("dark-theme", 
+    document.body.classList.contains("dark-theme")
+  );
 }
 
-// 分页逻辑
+/* ================= 分页功能 ================= */
 function displayPagination(totalItems) {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   const pagination = document.getElementById("pagination");
@@ -244,100 +286,57 @@ function displayPagination(totalItems) {
   }
 }
 
-// 分类筛选
+/* ================= 模态框控制 ================= */
+function initModalControl() {
+  const modal = document.getElementById("content-modal");
+  const closeBtn = document.querySelector(".close-modal");
+
+  closeBtn.addEventListener("click", () => {
+    modal.classList.remove("show");
+    modal.querySelector("video")?.pause();
+  });
+
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.classList.remove("show");
+      modal.querySelector("video")?.pause();
+    }
+  });
+}
+
+/* ================= 分类筛选 ================= */
 function filterContent(category) {
   currentCategory = category;
   currentPage = 1;
-  displayContent(currentPage, currentCategory);
+  displayContent(currentPage, category);
   updateCategoryButtons(category);
 }
 
-// 设置分类按钮
-function setupCategoryButtons() {
-  const buttons = document.querySelectorAll(".category-btn");
-  buttons.forEach(button => {
-    const color = button.getAttribute("data-color");
-    button.style.setProperty("--btn-color", color);
-    button.addEventListener("mouseenter", () => {
-      button.style.backgroundColor = color;
+function updateCategoryButtons(activeCategory) {
+  document.querySelectorAll(".category-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.textContent === activeCategory);
+  });
+}
+
+/* ================= 主初始化 ================= */
+document.addEventListener("DOMContentLoaded", () => {
+  initCommon();
+  
+  // 首页特有初始化
+  if (document.getElementById("content-gallery")) {
+    displayContent(1, "全部");
+    initModalControl();
+    document.querySelectorAll(".category-btn").forEach(btn => {
+      btn.addEventListener("click", () => filterContent(btn.textContent));
     });
-    button.addEventListener("mouseleave", () => {
-      if (!button.classList.contains("active")) {
-        button.style.backgroundColor = "#656565";
-      }
-    });
-    button.addEventListener("click", () => {
-      buttons.forEach(btn => btn.classList.remove("active"));
-      button.classList.add("active");
-      button.style.backgroundColor = color;
-    });
-  });
-}
-
-// 更新分类按钮状态
-function updateCategoryButtons(category) {
-  const buttons = document.querySelectorAll(".category-btn");
-  buttons.forEach(button => {
-    if (button.textContent === category) {
-      button.classList.add("active");
-      button.style.backgroundColor = button.getAttribute("data-color");
-    } else {
-      button.classList.remove("active");
-      button.style.backgroundColor = "#656565";
-    }
-  });
-}
-
-// 获取分类颜色
-function getCategoryColor(category) {
-  const buttons = document.querySelectorAll(".category-btn");
-  for (const button of buttons) {
-    if (button.textContent === category) {
-      return button.getAttribute("data-color");
-    }
-  }
-  return "#656565";
-}
-
-// 设置模态框
-function setupModal() {
-  const modal = document.getElementById("content-modal");
-  const closeModal = document.querySelector(".close-modal");
-
-  closeModal.addEventListener("click", () => {
-    modal.classList.remove("show");
-    const video = modal.querySelector("video");
-    if (video) {
-      video.pause();
-    }
-  });
-
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      modal.classList.remove("show");
-      const video = modal.querySelector("video");
-      if (video) {
-        video.pause();
-      }
-    }
-  });
-}
-
-// 设置主题
-function setupTheme() {
-  const themeToggle = document.getElementById("theme-toggle");
-  const savedTheme = localStorage.getItem("theme");
-
-  if (savedTheme === "dark") {
-    document.body.classList.add("dark-theme");
-    themeToggle.checked = true;
   }
 
-  themeToggle.addEventListener("change", () => {
-    document.body.classList.toggle("dark-theme");
-    localStorage.setItem("theme", document.body.classList.contains("dark-theme") ? "dark" : "light");
+  // 博客页箭头交互
+  document.querySelectorAll(".article-arrow").forEach(arrow => {
+    arrow.addEventListener("click", (e) => {
+      e.preventDefault();
+      // 这里可以添加具体跳转逻辑
+      console.log("导航到文章详情页");
+    });
   });
-}
-
-// 初始化
-document.addEventListener("DOMContentLoaded", initPage);
+});
