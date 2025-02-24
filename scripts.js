@@ -17,13 +17,31 @@ const contentData = [
     contentId: "NO.002",
     date: "2025-02-15"
   },
+    {
+    type: "video",
+    title: "模型展示",
+    contentUrl: "videos/Airpods Pro.mp4",
+    thumbnail: "images/A.jpg",
+    category: "三维",
+    contentId: "Three-dimensional",
+    date: "2025-01-01"
+  },
+    {
+    type: "video",
+    title: "模型展示",
+    contentUrl: "videos/RTX4090.mp4",
+    thumbnail: "",
+    category: "三维",
+    contentId: "Three-dimensional",
+    date: "2025-01-01"
+  },
   {
     type: "video",
     title: "模型展示",
     contentUrl: "videos/002.mp4",
     thumbnail: "",
     category: "三维",
-    contentId: "NO.003",
+    contentId: "NO.005",
     date: "2025-01-01"
   },
   {
@@ -32,7 +50,7 @@ const contentData = [
     contentUrl: ["images/GoPro运动相机.jpg", "images/音响.jpg", "images/游戏机小场景.jpg"],
     thumbnail: "images/GoPro运动相机.jpg",
     category: "摄影",
-    contentId: "NO.004",
+    contentId: "NO.006",
     date: "2025-02-15"
   },
   {
@@ -41,7 +59,7 @@ const contentData = [
     contentUrl: "videos/003.mp4",
     thumbnail: "images/A.jpg",
     category: "三维",
-    contentId: "NO.005",
+    contentId: "NO.007",
     date: "2025-01-01"
   },
   {
@@ -50,7 +68,7 @@ const contentData = [
     contentUrl: "videos/004.mp4",
     thumbnail: "images/A.jpg",
     category: "三维",
-    contentId: "NO.006",
+    contentId: "NO.008",
     date: "2025-01-01"
   },
   {
@@ -59,7 +77,7 @@ const contentData = [
     contentUrl: "videos/005.mp4",
     thumbnail: "images/A.jpg",
     category: "三维",
-    contentId: "NO.007",
+    contentId: "NO.009",
     date: "2025-01-01"
   },
   {
@@ -68,7 +86,7 @@ const contentData = [
     contentUrl: "videos/006.mp4",
     thumbnail: "images/A.jpg",
     category: "三维",
-    contentId: "NO.008",
+    contentId: "NO.010",
     date: "2025-01-01"
   },
   {
@@ -217,9 +235,12 @@ function displayContent(page, category) {
     <div class="content-item ${item.type}-item" data-id="${item.contentId}">
       <div class="content-thumbnail">
         ${item.type === 'video' ? `
-          <video class="thumbnail" preload="metadata">
-            <source src="${item.contentUrl}#t=0.5" type="video/mp4">
-          </video>
+          <div class="video-thumbnail-container">
+            ${item.thumbnail ? `<img src="${item.thumbnail}" class="video-thumbnail" alt="${item.title}">` : ''}
+            <video class="video-preview" preload="metadata" ${item.thumbnail ? 'style="display: none;"' : ''}>
+              <source src="${item.contentUrl}#t=0.5" type="video/mp4">
+            </video>
+          </div>
         ` : `
           <img src="${item.thumbnail}" class="thumbnail" alt="${item.title}">
         `}
@@ -253,7 +274,13 @@ function showContentModal(content) {
   
   let contentHTML = "";
   if (content.type === "video") {
-    contentHTML = `<video controls autoplay><source src="${content.contentUrl}"></video>`;
+    contentHTML = `
+      <div class="modal-video-container">
+        <video controls autoplay>
+          <source src="${content.contentUrl}" type="video/mp4">
+        </video>
+      </div>
+    `;
   } else {
     contentHTML = content.contentUrl.map(url => 
       `<img src="${url}" class="modal-image">`
