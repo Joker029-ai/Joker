@@ -277,19 +277,42 @@ h1 {
 .pagination {
   text-align: center;
   margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
-.pagination button {
+.pagination-arrow {
   background-color: #6f6f6f;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  margin: 0 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.pagination button:hover {
+.pagination-arrow:hover {
+  background-color: #56becf;
+}
+
+.pagination-numbers {
+  display: flex;
+  gap: 5px;
+}
+
+.pagination-numbers button {
+  background-color: #6f6f6f;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-numbers button:hover {
   background-color: #56becf;
 }
 
