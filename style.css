@@ -269,8 +269,8 @@ h1 {
  align-items: center;
 }
 .image-row img {
-  margin: 20px 15px 0;
-  height: 40px;  /* 控制图片大小 */
+  margin: 20px 13px 0;
+  height: 35px;  /* 控制图片大小 */
 }
 
 /* 分页 */
