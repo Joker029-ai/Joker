@@ -138,7 +138,7 @@ h1 {
 /* 分类标签 */
 .categories {
   text-align: center;
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 .category-btn {
@@ -204,6 +204,26 @@ h1 {
   object-fit: cover;
 }
 
+.video-thumbnail-container {
+  position: relative;
+  width: 100%;
+  height: 270px;
+}
+
+.video-thumbnail {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.video-preview {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
 .category-label {
   position: absolute;
   top: -35px;
@@ -241,6 +261,16 @@ h1 {
 
 .dark-theme .content-date {
   color: #ccc;
+}
+
+.image-row {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+.image-row img {
+  margin: 20px 15px 0;
+  height: 40px;  /* 控制图片大小 */
 }
 
 /* 分页 */
@@ -286,15 +316,24 @@ h1 {
   width: 80%;
   max-width: 1140px;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 1px;
   position: relative;
   max-height: 80vh;
   overflow-y: auto;
 }
 
-.modal video {
+.modal-video-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-video-container video {
   width: 100%;
   height: auto;
+  max-height: 80vh;
   border-radius: 8px;
 }
 
@@ -381,7 +420,6 @@ a:hover {
   text-decoration: none;
   color: inherit;
 }
-
 
 /* 页脚 */
 footer {
