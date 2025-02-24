@@ -17,7 +17,7 @@ const contentData = [
     contentId: "NO.002",
     date: "2025-02-15"
   },
-    {
+  {
     type: "video",
     title: "模型展示",
     contentUrl: "videos/Airpods Pro.mp4",
@@ -26,7 +26,7 @@ const contentData = [
     contentId: "Three-dimensional",
     date: "2025-01-01"
   },
-    {
+  {
     type: "video",
     title: "模型展示",
     contentUrl: "videos/RTX4090.mp4",
@@ -299,8 +299,8 @@ function showContentModal(content) {
 /* ================= 分页功能 ================= */
 function displayPagination(totalItems) {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
-  const pagination = document.getElementById("pagination");
-  pagination.innerHTML = "";
+  const paginationNumbers = document.getElementById("pagination-numbers");
+  paginationNumbers.innerHTML = "";
 
   for (let i = 1; i <= totalPages; i++) {
     const button = document.createElement("button");
@@ -309,8 +309,29 @@ function displayPagination(totalItems) {
       currentPage = i;
       displayContent(currentPage, currentCategory);
     };
-    pagination.appendChild(button);
+    paginationNumbers.appendChild(button);
   }
+
+  // 更新箭头按钮状态
+  const prevPageButton = document.getElementById("prev-page");
+  const nextPageButton = document.getElementById("next-page");
+
+  prevPageButton.disabled = currentPage === 1;
+  nextPageButton.disabled = currentPage === totalPages;
+
+  prevPageButton.onclick = () => {
+    if (currentPage > 1) {
+      currentPage--;
+      displayContent(currentPage, currentCategory);
+    }
+  };
+
+  nextPageButton.onclick = () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      displayContent(currentPage, currentCategory);
+    }
+  };
 }
 
 /* ================= 模态框控制 ================= */
