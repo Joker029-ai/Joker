@@ -1,0 +1,780 @@
+公司：广州维纳斯智能科技股份有限公司
+部门：数字化工程部 
+职位：数字化运营工程师
+办公电脑：显示屏&机箱：BG-dn018
+显示器：SHYWORTH-29C1
+主机：IPASON-G2
+
+
+https://qiye.aliyun.com/alimail/
+阿里邮箱tech@venace.com  密码:IT2025%f25
+富通天下venace_05  密码：FT2023%f88
+84770410@qq.com
+
+
+【维纳斯官网】
+后台：https://www.venace.com/wp-admin   
+账号密码：HQ   HT2023$%rf
+(WPHT2024%my)
+https://vvenace.com/
+https://store.venace.com/
+https://react.venace.com/
+https://i18n.pinshop.com/
+站点网站
+https://www.venace.com/shops/standingdesk/
+广州市黄埔区高新技术产业开发区科学大道 162 号 B3 栋
+广东省广州市黄埔区科丰路31号G1栋408-410
+
+
+【品推软件/网站后台】
+https://store.venace.com/
+https://qq.pinshop.com/
+账号:  venace
+密码：A202366b$
+（venace1003）
+My1003$f
+
+
+【领星——独立站】
+https://erp.lingxing.com/
+用户名：ShuoLin
+密码：DLZ88XQDM%
+邮箱：tech@venace.com
+
+
+【西邮——独立站】
+https://oms.shippingself.com/user/content#
+账号：DLZ01
+密码：AF408410abc
+邮箱：tech@venace.com
+
+//API接口说明文档
+https://help.westernfulfill.com/docs/api
+密码：api2023
+
+//API接口测试账号
+http://oms.qa.xiyou56.com/
+账号：WNS1126
+密码：Aa123456
+*APP KEY： 30ECB7B124FF509B1DCB1A678BDD4B23
+*APP TOKEN： 982B71C5D46545A4633261BB44AA24CB
+
+
+【Shopify】
+主账号
+邮箱：charles.liu@venace.com
+密码：D24168$abc
+模板：https://teaandcoffee-theme.myshopify.com/
+
+
+子账号
+邮箱：tech@venace.com
+密码：Z16kd$88
+
+
+【TaxJar——销售税软件Avalara和TaxJar】
+https://app.taxjar.com/sign_in
+用户名：John S Stills
+邮箱：shuolin029@gmail.com
+密码：Z1x$518c
+
+
+【SEMRUSH】
+邮箱：84770410@qq.com
+密码：AB2499$%f
+
+
+【空中云汇】
+账号：13826253276
+密码：AB24168abc$
+
+CLIENT ID：riL_1rfzSc-yWvOlSK6Byw
+API密钥：7cb0d17c42fee0856339447088d0e438e287b9271bb984e167cd3d5055ec4855aaf05d06fb70bb8b261bb645cd337756
+
+通知链接：https://react003.pinshop.com/wc-api/airwallex_webhook/
+密钥：whsec_DWLh7UNCRGZnABh1phsFuNbzY-nENNyU
+
+
+
+【PayPal】
+登陆密码：vnch609611
+Paypal的收款账号：finance01@venace.com
+商家号：838TWDFFGWGLG
+Client ID：Aa90yH0xh6ZqcVLwjRnJlhmJ4E7ZUplyrFsV3MqvBuL4MT4ArT6ioai0B7661nkiSiLUCkOaBiDXXgYZ
+Secret key：EJ40MOMUTmQpQUbPlFDNyaoyywq_F2ecovK5bCCtpKNWqaqEjIBTtqWjNplhhbuK2Iekdf1qLUSOOb7U
+
+
+【scanova】说明书二维码
+lin
+shuolin029@gmail.com
+
+
+【AWS亚马逊云盘】(说明书)
+邮箱：charles.liuchina@gmail.com
+密码：AM408410bc$
+ID：677276086470
+
+
+【shopify专用谷歌工具邮箱】
+邮箱：venacehousehold@gmail.com
+密码：AD408410b$
+
+邮箱：venacetech@gmail.com
+密码：AD408410$f
+
+
+
+
+【共享服务器】
+账户：LWM
+密码：Vnchss2022
+
+【绿盾服务器（财务）】
+账户：administrator
+密码：Admin123
+
+
+【绿盾客户端】
+IP：192.168.1.254
+用户名：admin
+密码：vnchss2024
+
+
+【打印机】
+KONICA MINOLTA C364SeriesPCL
+TCP/IP端口
+（P）192.168.1.250_1
+（A）192.168.1.250
+驱动：bizhub C364/C284/C224
+D:\打印机驱动\BHC554ePCL6Winx64_5400ZH-CN
+
+
+【公司WiFi】
+WIFI名：VENACE.COM
+WIFI密码：8408410abc
+
+财务室
+WiFi名称：venace.cn  
+密码：venace08
+
+光纤路由：408
+密码：82302487
+管理：192.168.1.1
+
+
+开会苹果笔记本电脑
+用户：venace
+开机密码：8408410
+序列号：C1MQ7RS4G940
+
+
+
+【共享管理磁盘】
+192.168.1.24
+GL——8d4rf
+cw——5hfdg
+Finance——p5wnv6
+Amazon——4y5ro2
+Design——pd58ej
+Supply——5hi1vm
+HR——zx8wp6
+Sale——ct76hsq
+Manager——01vrqq8
+......
+共享盘财务权限账号
+用户名：cw
+密码：5hfdg
+"财务"文件夹【专属】
+用户名：Amazon
+密码：4y5ro2
+"亚马逊"文件夹【专属】
+[详细信息参考“管理”文件]
+
+
+[-信息文件内密匙-]
+【重要文件】AD2277
+D:\【工作整理】\工作台\1信息文件\Admin password 231220.docx
+
+
+【企业邮箱管理——亚马逊另外品牌（宏毅+旭斌）】
+邮箱访问地址： https://qiye.aliyun.com
+管理员账号： postmaster@novahivest.top
+密码：T94jhd16w
+
+
+
+
+【Hostgator】
+https://www.hostgator.com/my-account/login?timeout=true
+邮箱：84770410@qq.com
+密码：HA2022$%f
+521563
+
+
+【WHM】
+https://192.254.137.83:2087/
+账号：root
+密码：9LrIrddvI05nByYU
+（当官网出现524状态码时，重新启动DNS服务器）
+
+
+【cPanel】
+https://www.venace.com:2083
+账号：venace
+密码：bCtdZlnmgC0bZjQB
+
+mailman 的 Mailman 密码已更改为 2XSSm%FO611V
+2XSSm%FO611V
+
+
+【FTP】
+FTP Login
+FTP 用户名: backup@venace.com
+FTP 服务器: ftp.venace.com（192.254.137.83）
+FTP 密码:s8zrd10AippK
+FTP & 显式 FTPS 端口:  21
+
+
+【cloudflare】域名服务器
+https://www.cloudflare.com/zh-cn/application-services/products/dns/
+账号：charles.liu@venace.com
+密码：AQ2022$%rt
+需要{二次认证}
+
+
+
+【google shopping】谷歌商户
+venacehardware@gmail.com
+Mycrc50853933$
+
+关联WooCommerce
+1.wordpress认证邮箱：tech@venace.com
+2.Google认证邮箱：venacehardware@gmail.com
+3.账户：venace.com . https://www.venace.com/(248521442)
+4.*手机：17603621240（后续需要改动公司联系方式）
+02082303742（公司座机）
+5.Google Ads账号：Venace Tech Inc (8380285373)
+
+
+【华为云】2024/10/12到期
+https://www.huaweicloud.com/
+venace
+F202488$abc
+需要{二次认证}
+
+[obs-browser-plus]控制器
+User Name：venace-L（主账号）
+Password：n10_J&%HSZ%gPx0O!SaVuP58
+Access Key Id：IKGIP8DNFC3JQX1FH454
+Secret Access Key：JaY1W24yCsUEkjaPeDP0vtA1CAl88qkGmPZu2dQe
+
+User Name：venace-M（刘总专用）
+Password：Qp_2T!OdUOb_vu5%0LACV9TP0yU2vw
+Access Key Id：5QLYYI7MRA2G6MBO7YLY
+Secret Access Key：ljjw1GiNg9PI4lyHr25XmbK0tnhLMlEBVjSvxdlf
+
+User Name：venace-HR（行政专用）
+Password：1veOtU2eXUK0W2M
+Access Key Id：QF5JVS0DU2TBTT68NXDZ
+Secret Access Key：sqPLz15176T8nU32MaOPPcq8fVt4hAUlXYqbXmu7
+
+User Name：venace-FI（财务专用）
+Password：3isQBH61CK_scwPGr2DP
+Access Key Id：FFYWL21POCZJLCUZLKWF
+Secret Access Key：xH8uI6n6uuFtanLHVPyRJHZIODt27xXBpWImOGF2
+
+User Name：venace-AM（亚马逊专用）
+Password：H06WqFwqVYxBrFM3o$2r
+Access Key Id：UGSRQ0VRI3W7DOI8AENB
+Secret Access Key：XbTrewp1YIPJ1T5x0Tux7wzqapbPsOCSsmikpOAC
+
+User Name：venace-AM1（亚马逊运营专员）
+Password：2a#Nw!hF5m
+Access Key Id：UJCJ4R6EUPQTZXNEOKPZ
+Secret Access Key：kxvTs5VZz5bYiw2TRyARXVVkmhGlZoUT0SCU5jYR
+
+User Name：venace-AM2（亚马逊运营专员）
+Password：ACAhzTf9DWogDwuoOtfPQn7pAi$JdcK5
+Access Key Id：WVYTZZK5MZRHATHFAKNZ
+Secret Access Key：5hDymzF5GWDLB4RSRUOWLSNbudv8ELC6hRMdSHaN
+
+User Name：venace-WM（沃尔玛专用）
+Password：$W3zh1
+Access Key Id：VIMVRTDRXAFWJJPIUJE3
+Secret Access Key：ckiBysm5988ajMteeYeShn3x7XRMIqWW2VvtlKOh
+
+
+wayfair——WF
+供应链——SCM
+
+
+【阿里云店铺】
+HS820723
+H2488$a
+bqyhealth.cn
+
+
+【卖家精灵】
+用户名：tech
+手机号：17603621240
+密码：O12546ioeiue
+邮箱：shuolin029@gmail.com
+
+【谷歌邮箱】
+https://mail.google.com/mail/u/0/#inbox
+shuolin029@gmail.com
+zsl2990986060..
+venaceit.001
+2990986060@qq.com
+17603621240
+【X】_Hades_I
+
+【美区ID邮箱】【亚马逊】
+https://mail.proton.me/u/0/inbox
+Hades029@protonmail.com
+protonmail029..
+John_Z_Stills
+
+【美区注册资料】
+John S Stills
+United States
+1999/12/10
+"Hades029@protonmail.com"
+"Protonmail029.."
+17603621240
+Robinson Lane
+Ohio
+特拉华州
+19702
+740 3693945
+
+个人.毛里塔尼亚.ID：6594-0635-8240
+
+
+【Discord】
+linmu0403（谷歌邮箱）
+
+
+tech@venace.com
+Harris
+harris0275
+
+
+
+【社媒】
+
+Twitter（https://twitter.com/VenaceHousehold）
+邮箱：venacehardware@gmail.com
+密码：Tw2020$%smo
+
+Facebook（https://www.facebook.com/venacefurniture）
+
+
+Linkedin（https://www.linkedin.com/company/venace）
+邮箱：Charles.liu@venace.com
+密码：Ab408410$
+
+Youtube（https://www.youtube.com/@venaceinc）
+邮箱：venacehardware@gmail.com
+密码：AF2488$%hs
+
+Instagram（https://www.instagram.com/venace_hardware/）
+邮箱：sales0@venace.com
+密码：In2020￥%_vnch
+
+Pinterest（https://www.pinterest.com/venace/）
+邮箱：venacehousehold@gmail.com
+密码：Pt2020$%venace
+
+
+
+
+
+UNITY
+shuolin029@gmail.com
+Zsl2990986060..
+MU-TI
+
+
+【Contact Us】
+Venace Intelligent Technology Inc.
+广州维纳斯智能科技股份有限公司
+Add:Building B3 , No. 162, Kexue Ave., Hi-Tech Industry Development Zone, Huang Pu District ,Guangzhou, Guang Dong China
+510530
+Tel: +86-20-82303742
+Fax: +86-20-82302487
+Mail: sales@venace.com
+【修改地址】
+Add:Building G1, No.31 Ke Feng Road, Huangpu District, Guangzhou City, Guangdong Province, China
+
+【地图代码】
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7336.261058197113!2d113.45245314181606!3d23.16543563522791!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x58b753961ab98fa2!2z5bm_5bee56eR5a2m5Z-O5Yib5oSP5aSn5Y6m!5e0!3m2!1sen!2sin!4v1600918356611!5m2!1sen!2sin" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+【修改地图】
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2594.0942806236867!2d113.45630460669975!3d23.14817068143453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403014318aede4f%3A0x4c55063aa95a4d72!2z5Y2O5Y2X5paw5p2Q5paZ5Yib5paw5Zut6KW_6Zeo!5e0!3m2!1sen!2sus!4v1724121085186!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7337.360894327901!2d113.4538266!3d23.1453528!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403014318aede4f%3A0x4c55063aa95a4d72!2sSouth%20China%20New%20Material%20Innovation%20Yuan%20West%20Gate!5e0!3m2!1sen!2sus!4v1724121792011!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+======================================================
+
+网站测速test speed of website
+https://www.itdog.cn/http/
+https://gtmetrix.com/
+
+https://pagespeed.web.dev/
+
+涂抹消除图片杂物
+https://picwish.cn/remove-unwanted-object
+
+AI描述产图
+https://playgroundai.com/
+
+ChatGPT免费共享账号
+https://chatgptplus.cn/
+https://token.oaifree.com/auth
+https://www.perplexity.ai/
+https://artifacts.e2b.dev/
+https://saikachat.pp.ua/
+
+http://23.94.204.167:12345/ 35
+http://135.237.81.98:5000/ 12
+https://gptac.heumc.cc/ 16
+https://openai01.net/zh
+
+
+免版权图片网站
+https://pixabay.com/images/search/kitchen%20design/
+https://unsplash.com/
+https://www.pexels.com/zh-cn/
+https://www.freepik.com/
+https://www.shopify.com/stock-photos
+https://stocksnap.io/
+https://www.rawpixel.com/
+
+压缩图片网站
+https://tinypng.com/
+https://compressor.io/
+https://docsmall.com/
+pdf转换
+https://www.cleverpdf.com/cn
+https://www.pdfpai.com/
+
+前端开发工具说明
+https://zhuanlan.zhihu.com/p/553965453
+
+css动态库
+https://animate.style/
+
+免费在线查看3D STEP文件的工具
+https://imagetostl.com/cn/view-step-online
+
+小图标
+https://iconpark.oceanengine.com/official
+
+网站下载器和内容管理系统（CMS） 现有网站转换器
+https://archivarix.com/en/website-downloader-cms-converter/
+
+草料二维码
+https://cli.im/
+17603621240
+w123456789
+
+【scanova】
+lin
+shuolin029@gmail.com
+
+在线仿站工具（邮箱）
+https://www.wget.fit/
+
+仿站抓取（格式化html）
+https://3389x.com/zxfz/
+
+扒站
+http://wget.oiweb.cn/
+
+页面截图
+Screenshot Guru
+“ctrl+shift+s”
+
+机场
+https://web.fscloud.cc/#/register?code=qLLRumLp
+https://www.mojie.cyou/#/register?code=Jw9a2aiq
+https://xn--mesr8b36x.net/#/register?code=EtbQHaGb
+
+
+https://nav.laogou717.com/
+
+http://www.ypfxw.com/
+https://link3.cc/hack
+https://www.haozy.top/
+奈斯搜索https://www.niceso.fun/
+阿里盘搜https://www.alipansou.com/
+
+https://aliyunpanziyuan.com/
+https://pan666.net/
+
+PDF翻译：https://linux.do/t/topic/333394
+https://doclingo.ai/zh/
+
+视频编辑
+https://clideo.com/resize-video
+视频去水印
+https://online-video-cutter.com/
+
+
+【GitHub】
+shuolin029@gmail.com
+GitHub2025
+Joker029-ai
+
+视频
+https://henryheffernan.com/
+
+865+9348+1500+4127+1200=16261
+782+8083+1202+4739=14806
+695+6818+902+4739=13154
+610+5742+601+4275+200=11428
+543+4667+301+3795+300=9606
+529+4667+300+3276+100=8873
+450+3590+0+2802+0=6842
+0+2519+1741=4260
+1448+865=2313
+566/3=188
+2024/9/12——全部还清上岸啦！！！
+
+
+
+***********************************************************************************
+
+
+
+//关键词生成文章
+Write a scientific, persuasive and authoritative content marketing article on the topic: . The keyword is “standing desk”. The word count should be 1,000 words or less and the keyword density should be 4-6%. Don't repeat too much from already generated articles. Pay attention to the correct use of grammatical order. Do not recommend products or list other brands, just focus on the product keyword itself! Humanize the article with a real person's perspective and article results, language conventions to enhance authenticity.
+
+
+//润色修改
+17.9 per cent of sentences contain transitional words or phrases, which is below the recommended minimum of 30 per cent. Please increase this percentage, which is currently too low.
+OK SEO Score This text scored 46.2 on the Flesch Reading Difficulty Test, making it very difficult to read, please optimize the text to reach a score of 70-80. Please try to shorten the sentences and reduce the number of rare words to improve readability. To do this, please improve this article by adding deletions
+And help to correct the order of speech in the article to prevent the wrong expression of embodiment
+
+
+//AI人性化
+Re-generate this article above optimized for this requirement
+Rewrite the above with the following adjustments:
+Burstiness refers to the variation in sentence lengths and structures, creating a dynamic and engaging rhythm. High perplexity involves diverse vocabulary and intricate sentence patterns, while high burstiness blends short, impactful sentences with longer, detailed ones. Both elements enhance the readability and interest of the text, making it more captivating for the reader. That said, your response must be written with a very high degree of perplexity and burstiness. So high to the point where some sentences may even be difficult to understand.
+Here is a good example of sentences with a high degree of perplexity and burstiness. Maintain a similar tone and writing style to this:
+“Premiere Pro has an attractive, flexible interface, and I'm a fan of the simplifying changes Adobe brought to it in the April 2022 update. The startup view helps you quickly get to projects you've been working on, start new projects, or search for Adobe Stock footage. The dark program window makes your clips the center of attention. It now just has three main modes (in addition to the Home screen), for Import, Edit, and Export. A button or menu choice in Edit mode has a good selection of workspace layouts for Assembly, Editing, Color, Export, and more. You can pull off any of the panels and float them wherever you want on your display(s). Get started with templates for You can create content bins based on search terms, too. ”
+Avoid using the following words in your output: meticulous, meticulously, navigating, complexities, realm, understanding, realm, dive, shall, , tailored, towards, underpins, everchanging, ever-evolving, treasure, the world of, not only, designed to enhance, it is advisable, daunting, when it comes to, in the realm of, amongst unlock the secrets, unveil the secrets, and robust.
+
+Help me optimize the article generated above
+
+
+//页面规整代码
+.container .row{
+    padding:40px 12% 0;
+}
+.bialty-container > .vc_row-fluid{
+    padding-right:10px;
+}
+
+//商城文章图片样式设置
+style="float: right; margin: 10px;"
+
+
+//大类关键词
+Standing Desk
+adjustable desk
+stand up desk
+Height Adjustable Desk
+adjustable height desk
+
+electric standing desk
+ergonomic desk
+Sit to Stand Desk
+electric adjustable desk
+standing office desk
+
+
+优质文章：
+The Physiological Benefits of a Height Adjustable Desk for Desk Workers
+Key Considerations When Buying Your First Sit to Stand Desk
+A Buyer’s Guide to Choosing the Right Standing Desk Frame
+
+
+//主题颜色
+#73cac7
+124/201/200/1
+
+
+
+
+//企业微信数据迁移
+C:\Users\Admin\Documents\WXWork
+C:\Users\Admin\AppData\Roaming\Tencent\WXWork\VoipRecords
+
+
+
+
+//AI工具试用
+https://openlinkprofiler.org/register
+//moz//OpenLinkProfiler//Monitor Backlinks//humanwriter
+tech@venace.com
+455dia99aa
+Z455dia99aa
+
+
+Analytics – Google Analytics
+ID：lin z
+
+
+
+
+
+//推广落地页
+Transform Your Workday with the Perfect Standing Desk
+https://www.venace.com/transform-workday-perfect-standing-desk/
+
+Standing desk can transform your workday
+https://www.venace.com/standing-desk-can-transform-your-workday/
+
+Texas,California,Florida,Georgia,Illinois,New York
+德克萨斯州,加利福尼亚州,弗罗里达州,乔治亚州,伊利诺伊州,纽约
+
+
+//美国——海外仓
+
+WPLA16         WPLA1E.       
+1979 Renaissance Pkwy, Rialto, CA 92376
+加利福尼亚州
+
+WPLA15         WPLA15     
+13277 San Bernardino Ave,Fontana, CA 92335
+加利福尼亚州
+
+WPPA2        WPPA2
+3363 Gun Club Rd, Nazareth, PA 18064 US
+宾夕法尼亚州+
+
+WPHOU4           WPHOU4     
+14402 Fallbrook Dr Suite 290,Cypress,TX,77429
+德克萨斯州
+
+WPNJ7	  WPNJT.
+3280 US Highway 206,Bordentown,NJ,08505
+新泽西州+
+
+WPGA5	    WPGA6     WPGA5
+302 International Trade Pkwy, Georgia,31407
+乔治亚州
+
+伊利诺伊州（Illinois）的芝加哥，缩写为IL
+
+
+macrium reflect
+名：lin
+姓：z
+邮箱：tech@venace.com
+密码：S5dsha559$
+状态码：C9P3-5PWG
+
+
+//禅道
+账户：zentao
+密码：W538%diao
+
+用户名：admin   密码：W538%diao
+
+
+【shopify专用谷歌工具邮箱】
+邮箱：venacehousehold@gmail.com
+密码：AD408410b$
+
+邮箱：venacetech@gmail.com
+密码：AD408410$f
+
+
+
+【GitHub】
+shuolin029@gmail.com
+GitHub2025
+Joker029-ai
+
+
+
+
+
+//广州本地公司信息
+
+Guangzhou Venace  Intelligent Technology Inc.
+
+No.31 Ke Feng Road, Huangpu District, Guangzhou
+Room No.408&410 ,Building G1
+
+//香港公司信息
+
+RM F 6/F MEGA CUBE NO 8 WANG KWONG RD KLN HONG KONG
+
+
+
+
+
+
+//退货仓库
+WPNJ4：35 E Park Dr,Westampton,NJ,08060
+
+
+
+//退款政策
+To request a return, please contact us at tech@venace.com. If your return request is accepted, we will send you a method of sending your parcel to the return mailing address: 35 E Park Dr,Westampton,NJ,08060.
+We cannot accept items returned without a return request;
+
+
+
+  <style>
+  .hero h2, .hero h3 {
+    display: inline; /* 让 h2 和 h3 在同一行显示 */
+  }
+
+  .hero h2 {
+    font-size: 3em; /* 设置 h2 的字体较大 */
+  }
+
+  .hero h3 {
+    font-size: 1.5em; /* 设置 h3 的字体较小 */
+  }
+</style>
+
+
+class="article-arrow"
+
+
+
+静态网站
+https://blog.csdn.net/qq_20042935/article/details/133920722
+
+
+
+
+
+
+
+quality assurance
+
+Super Stable
+
+A powerful motor lifts at 3/4" per second, <br>tested 20,000 times for reliability. 
+<br><br>
+Adjustable height range: 27.9" to 46.8". <br>Features a robust metal frame made of <br>cold-rolled steel (SPCC). Maximum static<br> load capacity is 176 lbs, with daily use recommended at 160 lbs.
+
+
+
+
+
+
+弹出窗口添加文字描述；
+光标特效；
+上传操作困难；
+
+
+
+
+
+
