@@ -1,60 +1,29 @@
 $(document).ready(function () {
-  // 从URL参数中获取文章ID
-  function getArticleIdFromUrl() {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get("id"); // 例如：?id=1
-  }
-
-  // 动态加载文本文件内容
-  function loadArticleContent(articleId) {
-    if (!articleId) {
-      $("#article-text").text("Invalid article ID.");
-      return;
-    }
-
-    const articlePath = `../assets/articles/article${articleId}.txt`; // 调整文本文档路径
-    $.get(articlePath)
-      .done(function (data) {
-        $("#article-text").text(data); // 加载成功，显示内容
-      })
-      .fail(function () {
-        $("#article-text").text("Failed to load article content."); // 加载失败
-      });
-  }
-
-  // 设置文章标题
-  function setArticleTitle(articleId) {
-    $("#article-title").text(`Article ${articleId}`); // 动态设置标题
-  }
-
-  // 初始化页面
-  function initPage() {
-    const articleId = getArticleIdFromUrl();
-    if (articleId) {
-      setArticleTitle(articleId);
-      loadArticleContent(articleId);
+  // 从localStorage加载保存的内容
+  function loadSavedContent() {
+    const savedContent = localStorage.getItem("articleContent");
+    if (savedContent) {
+      $("#article-text").val(savedContent); // 加载保存的内容
     } else {
-      $("#article-text").text("No article ID provided.");
+      $("#article-text").val("This is the content of the article. You can edit it directly in this text area."); // 默认内容
     }
   }
 
   // 保存更改
   $("#save-button").on("click", function () {
-    const updatedContent = $("#article-text").text();
-    const articleId = getArticleIdFromUrl();
-    // 这里可以替换为实际的保存逻辑，例如发送到服务器
-    console.log("Updated Content for Article", articleId, ":", updatedContent);
+    const updatedContent = $("#article-text").val(); // 获取textarea的内容
+    localStorage.setItem("articleContent", updatedContent); // 保存到localStorage
     alert("Changes saved successfully!");
   });
 
   // 取消编辑
   $("#cancel-button").on("click", function () {
     if (confirm("Are you sure you want to discard changes?")) {
-      const articleId = getArticleIdFromUrl();
-      loadArticleContent(articleId); // 重新加载原始内容
+      localStorage.removeItem("articleContent"); // 清除保存的内容
+      loadSavedContent(); // 恢复默认内容
     }
   });
 
   // 初始化页面
-  initPage();
+  loadSavedContent();
 });
