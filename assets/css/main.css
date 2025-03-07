@@ -60,6 +60,8 @@
 }
 
 
+
+
 /* 文章详情页样式 */
 .article-detail {
   display: flex;
@@ -85,16 +87,43 @@
 .article-text {
   font-size: 16px;
   line-height: 1.6;
-  color: #ffffff;
+  color: #fff;
+  background-color: #0c0c0c; /* 设置背景颜色 */
   border: 1px solid #ddd;
   padding: 15px;
   border-radius: 4px;
-  min-height: 300px;
+  min-height: 500px;
+  max-height: 800px; /* 限制最大高度 */
+  overflow-y: auto; /* 垂直滚动条 */
+  width: 100%; /* 宽度填满容器 */
+  resize: vertical; /* 允许垂直调整大小 */
+  overflow-x: hidden; /* 隐藏水平滚动条 */
+  font-family: inherit; /* 使用页面字体 */
   outline: none;
 }
 
 .article-text:focus {
   border-color: #007bff;
+  background-color: #0c0c0c; /* 聚焦时背景颜色 */
+}
+
+/* 自定义滚动条样式 */
+.article-text::-webkit-scrollbar {
+  width: 8px; /* 滚动条宽度 */
+}
+
+.article-text::-webkit-scrollbar-track {
+  background: #f1f1f1; /* 滚动条轨道颜色 */
+  border-radius: 4px;
+}
+
+.article-text::-webkit-scrollbar-thumb {
+  background: #888; /* 滚动条滑块颜色 */
+  border-radius: 4px;
+}
+
+.article-text::-webkit-scrollbar-thumb:hover {
+  background: #555; /* 滚动条滑块悬停颜色 */
 }
 
 .article-actions {
