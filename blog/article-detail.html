@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Joker - Article Detail</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="HTML5 website template">
+  <meta name="keywords" content="Joker, template, html, sass, jquery">
+  <meta name="author" content="Bucky Maler">
+  <link rel="stylesheet" href="../assets/css/main.css"> <!-- 调整CSS路径 -->
+</head>
+<body>
+<!-- notification for small viewports and landscape oriented smartphones -->
+<div class="device-notification">
+  <a class="device-notification--logo" href="#0">
+    <img src="../assets/img/logo.png" alt="Joker"> <!-- 调整图片路径 -->
+    <p>Joker</p>
+  </a>
+  <p class="device-notification--message">Joker has so much to offer that we must request you orient your device to portrait or find a larger screen. You won't be disappointed.</p>
+</div>
+
+<div class="perspective effect-rotate-left">
+  <div class="container"><div class="outer-nav--return"></div>
+    <div id="viewport" class="l-viewport">
+      <div class="l-wrapper">
+        <header class="header">
+          <a class="header--logo" href="#0">
+            <img src="../assets/img/logo.png" alt="Joker"> <!-- 调整图片路径 -->
+            <p>Joker</p>
+          </a>
+          <button class="header--cta cta">Hire Us</button>
+          <div class="header--nav-toggle">
+            <span></span>
+          </div>
+        </header>
+
+        <!-- 文章详情部分 -->
+        <section class="article-detail">
+          <div class="article-detail-content">
+            <h1 class="article-detail-title" id="article-title">Article Title</h1>
+            <div id="article-text" contenteditable="true" class="article-text">
+              <!-- 这里动态加载文本文件内容 -->
+            </div>
+            <div class="article-actions">
+              <button id="save-button" class="cta">Save Changes</button>
+              <button id="cancel-button" class="cta">Cancel</button>
+            </div>
+          </div>
+        </section>
+
+        <div>
+          <ul class="outer-nav">
+            <li class="is-active">Home</li>
+            <li>Works</li>
+            <li>About</li>
+            <li>Contact</li>
+            <li>Hire us</li>
+          </ul>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery-2.2.4.min.js"><\/script>')</script>
+        <script src="../assets/js/functions-min.js"></script>
+        <script src="../assets/js/article-detail.js"></script> <!-- 调整JS路径 -->
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
