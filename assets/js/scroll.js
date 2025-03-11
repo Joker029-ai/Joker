@@ -22,12 +22,16 @@
 
     console.log("✅ 文章列表找到，共", articles.length, "篇文章");
 
-    // 设置文章列表的总高度
-    const articleHeight = articles[0].offsetHeight;
-    let currentIndex = 0; // 当前索引
-    const SCREEN_LIMIT = 3; // 每屏最多显示的文章数
+    // ✅ **确保每个 `.article` 的高度计算正确**
+    articles.forEach(article => {
+      article.style.minHeight = "200px";  // 适配移动端，保证每篇文章不会被压缩
+      article.style.display = "block";  // 确保文章可见
+    });
 
-    articleList.style.height = `${articleHeight * articles.length}px`;
+    // **计算文章列表的总高度**
+    const articleHeight = articles[0].offsetHeight;
+    let currentIndex = 0;
+    const SCREEN_LIMIT = 3;
 
     function updateScroll() {
       const scrollPosition = currentIndex * articleHeight;
@@ -35,16 +39,16 @@
       console.log("📌 当前滚动索引：", currentIndex);
     }
 
-    // 📍 **桌面端滚动事件**
+    // ✅ **桌面端滚动**
     scrollContainer.addEventListener('wheel', function(e) {
       e.preventDefault();
-      e.stopPropagation();  // ✅ 确保事件不会冒泡
+      e.stopPropagation();
       const delta = Math.sign(e.deltaY);
       currentIndex = (currentIndex + delta + articles.length) % articles.length;
       updateScroll();
     }, { passive: false });
 
-    // 📍 **移动端滑动事件**
+    // ✅ **移动端滑动**
     let startY = null;
     scrollContainer.addEventListener('touchstart', function(e) {
       if (e.touches.length === 1) {
@@ -52,14 +56,13 @@
       }
     }, { passive: true });
 
-    scrollContainer.addEventListener('touchmove', function(e) { // ✅ 替换 `touchend`
+    scrollContainer.addEventListener('touchmove', function(e) {
       if (startY === null) return;
-      e.preventDefault();  // ✅ 确保不会触发浏览器默认滚动
+      e.preventDefault();
       e.stopPropagation();
-      
       const endY = e.touches[0].clientY;
       const deltaY = startY - endY;
-      if (Math.abs(deltaY) > 30) { // 触摸滑动阈值
+      if (Math.abs(deltaY) > 30) {
         const delta = deltaY > 0 ? 1 : -1;
         currentIndex = (currentIndex + delta + articles.length) % articles.length;
         updateScroll();
