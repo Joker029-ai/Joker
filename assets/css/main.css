@@ -167,3 +167,36 @@
 .article-actions .cta:hover {
   background: #0056b3;
 }
+
+
+/* 移动端 */
+@media (max-width: 600px) {
+  /* 博客列表页 */
+  .scroll-container {
+    height: auto;
+    overflow-y: auto; /* 允许垂直滚动，若不希望采用自定义滚动效果 */
+  }
+  .article-list {
+    height: auto;
+    transform: none;
+  }
+  .article {
+    width: 100%;
+    margin-bottom: 10px;
+    /* 如果自定义滚动效果在小屏上体验不好，也可以取消透明度设置 */
+    opacity: 1 !important;
+  }
+  
+  /* 博客详情页 */
+  .article-detail-content {
+    padding: 10px;
+    max-width: 100%;
+  }
+  .article-detail-title {
+    font-size: 20px;
+  }
+  .article-text {
+    font-size: 14px;
+    min-height: 300px;
+  }
+}
