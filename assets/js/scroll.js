@@ -48,7 +48,7 @@
       updateScroll();
     }, { passive: false });
 
-    // ✅ **移动端滑动**
+    // 📍 允许滚动的事件监听
     let startY = null;
     scrollContainer.addEventListener('touchstart', function(e) {
       if (e.touches.length === 1) {
@@ -58,19 +58,13 @@
 
     scrollContainer.addEventListener('touchmove', function(e) {
       if (startY === null) return;
-      e.preventDefault();
-      e.stopPropagation();
       const endY = e.touches[0].clientY;
       const deltaY = startY - endY;
-      if (Math.abs(deltaY) > 30) {
-        const delta = deltaY > 0 ? 1 : -1;
-        currentIndex = (currentIndex + delta + articles.length) % articles.length;
-        updateScroll();
+      if (Math.abs(deltaY) > 30) {  // 设定滑动触发阈值
+        e.preventDefault();
       }
       startY = null;
     }, { passive: false });
-
-    updateScroll();
   }
 
   document.addEventListener('DOMContentLoaded', initScroll);
