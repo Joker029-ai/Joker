@@ -172,8 +172,8 @@
 /* 适配移动端博客列表页 */
 @media (max-width: 600px) {
   .scroll-container {
-    height: auto;
-    overflow-y: auto;
+    height: 100vh;  /* ✅ 让滚动区域占满全屏 */
+    overflow-y: hidden;
     display: block !important; /* ✅ 确保可见 */
   }
 
