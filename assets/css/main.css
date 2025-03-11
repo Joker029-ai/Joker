@@ -176,11 +176,12 @@
     display: block !important;
     width: 100%;
     position: relative;
+    top: 50px;
   }
 
   .article-list {
     height: auto;
-    padding: 20px;
+    padding: 20px 0px;
     transform: none !important;
   }
 
