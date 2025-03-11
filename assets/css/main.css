@@ -185,7 +185,7 @@
   }
 
   .article {
-    flex-direction: column;  /* ✅ 移动端改为垂直排列 */
+    flex-direction: row;  /* ✅ 移动端横向排列 */
     width: 100%;
     height: auto;
     margin-bottom: 20px;
@@ -193,7 +193,7 @@
 
   .article-thumbnail {
     width: 100%;
-    height: 180px;  /* ✅ 适配移动端缩略图 */
+    height: 200px;  /* ✅ 适配移动端缩略图 */
   }
 
   .article-thumbnail img {
