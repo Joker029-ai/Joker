@@ -35,15 +35,16 @@
       console.log("📌 当前滚动索引：", currentIndex);
     }
 
-    // 📍 桌面端滚动事件
+    // 📍 **桌面端滚动事件**
     scrollContainer.addEventListener('wheel', function(e) {
       e.preventDefault();
+      e.stopPropagation();  // ✅ 确保事件不会冒泡
       const delta = Math.sign(e.deltaY);
       currentIndex = (currentIndex + delta + articles.length) % articles.length;
       updateScroll();
     }, { passive: false });
 
-    // 📍 移动端滑动事件
+    // 📍 **移动端滑动事件**
     let startY = null;
     scrollContainer.addEventListener('touchstart', function(e) {
       if (e.touches.length === 1) {
@@ -51,9 +52,12 @@
       }
     }, { passive: true });
 
-    scrollContainer.addEventListener('touchend', function(e) {
+    scrollContainer.addEventListener('touchmove', function(e) { // ✅ 替换 `touchend`
       if (startY === null) return;
-      const endY = e.changedTouches[0].clientY;
+      e.preventDefault();  // ✅ 确保不会触发浏览器默认滚动
+      e.stopPropagation();
+      
+      const endY = e.touches[0].clientY;
       const deltaY = startY - endY;
       if (Math.abs(deltaY) > 30) { // 触摸滑动阈值
         const delta = deltaY > 0 ? 1 : -1;
