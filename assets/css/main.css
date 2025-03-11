@@ -12,7 +12,7 @@
 }
 
 .scroll-container {
-  height: 90vh; /* 页面适配 */
+  height: 90vh;
   overflow: hidden;
   position: relative;
   top: 20px;
@@ -22,7 +22,7 @@
 /* 文章样式 */
 .article {
   display: flex;
-  flex-direction: row;
+  flex-direction: row;  /* ✅ PC 端默认横向排布 */
   background: #202020;
   margin-bottom: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -30,7 +30,7 @@
   overflow: hidden;
   max-width: 800px;
   width: 100%;
-  height: 250px; /* ✅ 统一文章高度 */
+  height: 220px;  /* ✅ PC 端固定文章高度 */
   opacity: 1;
   transition: opacity 0.3s ease;
 }
@@ -39,12 +39,13 @@
 .article-thumbnail {
   flex: 1;
   overflow: hidden;
+  height: 100%;  /* ✅ 让图片填充整个缩略图区域 */
 }
 
 .article-thumbnail img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover;  /* ✅ 确保图片不变形 */
 }
 
 /* 文章内容 */
@@ -54,6 +55,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: left;
 }
 
 /* 标题样式 */
@@ -73,7 +75,7 @@
 /* 按钮样式 */
 .article-button {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 10px 15px;
   background: #007bff;
   color: #fff;
   text-decoration: none;
@@ -184,8 +186,8 @@
 /* ========== 适配移动端 ========== */
 @media (max-width: 600px) {
   .scroll-container {
-    height: 100vh;  /* ✅ 让 `.scroll-container` 占满整个手机屏幕 */
-    overflow-y: auto;  /* ✅ 允许滚动 */
+    height: 100vh;
+    overflow-y: auto;
     display: block !important;
     width: 100%;
   }
@@ -197,15 +199,15 @@
   }
 
   .article {
-    flex-direction: column;  /* ✅ 手机端改为垂直排列 */
+    flex-direction: column;  /* ✅ 移动端改为垂直排列 */
     width: 100%;
-    height: auto; /* ✅ 适配不同屏幕 */
+    height: auto;
     margin-bottom: 20px;
   }
 
   .article-thumbnail {
     width: 100%;
-    height: 180px;  /* ✅ 适配移动端 */
+    height: 160px;  /* ✅ 调整缩略图高度 */
   }
 
   .article-thumbnail img {
