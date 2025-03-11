@@ -169,34 +169,33 @@
 }
 
 
-/* 移动端 */
+/* 适配移动端显示 */
 @media (max-width: 600px) {
-  /* 博客列表页 */
+  /* 让博客列表页在移动端自动滑动 */
   .scroll-container {
     height: auto;
-    overflow-y: auto; /* 允许垂直滚动，若不希望采用自定义滚动效果 */
+    overflow-y: auto;
   }
   .article-list {
     height: auto;
-    transform: none;
+    transform: none !important;
   }
   .article {
     width: 100%;
     margin-bottom: 10px;
-    /* 如果自定义滚动效果在小屏上体验不好，也可以取消透明度设置 */
-    opacity: 1 !important;
+    opacity: 1 !important; /* 确保文章可见 */
   }
-  
-  /* 博客详情页 */
+
+  /* 博客详情页适配 */
   .article-detail-content {
     padding: 10px;
     max-width: 100%;
   }
   .article-detail-title {
-    font-size: 20px;
+    font-size: 22px;
   }
   .article-text {
-    font-size: 14px;
-    min-height: 300px;
+    font-size: 16px;
+    min-height: 250px;
   }
 }
