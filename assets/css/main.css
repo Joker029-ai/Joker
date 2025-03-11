@@ -168,3 +168,66 @@
   background: #0056b3;
 }
 
+/* ========== 仅优化移动端 (max-width: 600px) ========== */
+@media (max-width: 600px) {
+  .scroll-container {
+    height: 100vh;  /* ✅ 让 `.scroll-container` 占满整个手机屏幕 */
+    overflow-y: auto;  /* ✅ 允许滚动 */
+    display: block !important;
+    width: 100%;
+    position: relative;
+  }
+
+  .article-list {
+    height: auto;
+    padding: 20px;
+    transform: none !important;
+  }
+
+  .article {
+    flex-direction: column;  /* ✅ 移动端改为垂直排列 */
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  .article-thumbnail {
+    width: 100%;
+    height: 180px;  /* ✅ 适配移动端缩略图 */
+  }
+
+  .article-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .article-content {
+    padding: 15px;
+    text-align: left;
+  }
+
+  .article-title {
+    font-size: 20px;
+  }
+
+  .article-preview {
+    font-size: 14px;
+    color: #ccc;
+  }
+
+  /* 详情页适配 */
+  .article-detail-content {
+    padding: 15px;
+    max-width: 100%;
+  }
+
+  .article-detail-title {
+    font-size: 22px;
+  }
+
+  .article-text {
+    font-size: 14px;
+    min-height: 250px;
+  }
+}
