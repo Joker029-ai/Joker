@@ -169,22 +169,26 @@
 }
 
 
-/* 适配移动端显示 */
+/* 适配移动端博客列表页 */
 @media (max-width: 600px) {
-  /* 让博客列表页在移动端自动滑动 */
   .scroll-container {
     height: auto;
     overflow-y: auto;
+    display: block !important; /* ✅ 确保可见 */
   }
+
   .article-list {
     height: auto;
-    transform: none !important;
+    transform: none !important; /* ✅ 避免 `translateY` 影响 */
   }
+
   .article {
     width: 100%;
     margin-bottom: 10px;
-    opacity: 1 !important; /* 确保文章可见 */
+    opacity: 1 !important; /* ✅ 确保文章显示 */
+    display: block !important; /* ✅ 避免 `display: none` */
   }
+}
 
   /* 博客详情页适配 */
   .article-detail-content {
