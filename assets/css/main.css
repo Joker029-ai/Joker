@@ -172,8 +172,8 @@
 /* 适配移动端博客列表页 */
 @media (max-width: 600px) {
   .scroll-container {
-    height: 100vh;  /* ✅ 让滚动区域占满全屏 */
-    overflow-y: hidden;
+    height: 100vh;  /* ✅ 让 `.scroll-container` 在手机端占满全屏 */
+    overflow-y: auto;  /* ✅ 允许滚动 */
     display: block !important; /* ✅ 确保可见 */
   }
 
@@ -184,9 +184,15 @@
 
   .article {
     width: 100%;
+    min-height: 200px; /* ✅ 适配不同屏幕，防止文章被压缩 */
     margin-bottom: 10px;
     opacity: 1 !important; /* ✅ 确保文章显示 */
     display: block !important; /* ✅ 避免 `display: none` */
+  }
+
+  .article img {
+    width: 100%; /* ✅ 确保缩略图不变形 */
+    height: auto;
   }
 }
 
