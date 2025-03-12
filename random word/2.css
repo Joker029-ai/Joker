@@ -11,11 +11,11 @@ body {
 
 .container {
     display: flex;
-    width: 80%;
+    /*width: 80%;*/
 }
 
 .result-list {
-    flex: 1;
+    /*flex: 1;*/
     padding: 20px;
     background: #202020;
     border-radius: 10px;
@@ -41,7 +41,7 @@ body {
 }
 
 .main-content {
-    flex: 3;
+    /*flex: 3;*/
     text-align: center;
     background: #202020;
     color:#fff;
