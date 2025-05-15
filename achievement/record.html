@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>现实RPG仪表盘</title>
+  <style>
+    body {
+      font-family: "Helvetica Neue", sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 10px;
+      height: 100vh;
+    }
+    .section {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: auto;
+    }
+    #daily-tasks {
+      grid-column: 1 / 2;
+      grid-row: 1 / 3;
+    }
+    #training-calendar {
+      grid-column: 2 / 3;
+      grid-row: 1 / 2;
+    }
+    #roleplay-mode {
+      grid-column: 2 / 3;
+      grid-row: 2 / 3;
+    }
+    h2 {
+      margin-top: 0;
+    }
+    .task {
+      margin-bottom: 10px;
+      transition: all 0.3s ease;
+      padding: 8px;
+      border-radius: 6px;
+      background: #f9f9f9;
+    }
+    .task.completed {
+      opacity: 0.7;
+      text-decoration: line-through;
+      background: #e8e8e8;
+    }
+    .task:hover {
+      transform: translateX(5px);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+    }
+    .calendar-day {
+      padding: 10px 5px;
+      text-align: center;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 14px;
+      min-height: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .calendar-day:hover {
+      transform: scale(1.05);
+    }
+    .calendar-day.completed {
+      background: #b2fab4;
+    }
+    .calendar-day.rest-day {
+      background: #a2c4f9;
+    }
+    .calendar-day.sick {
+      background: #f9cb9c;
+    }
+    .calendar-day.travel {
+      background: #d5a6bd;
+    }
+    .calendar-day.not-completed {
+      background: #f4cccc;
+    }
+    .calendar-day.empty {
+      background: transparent;
+      cursor: default;
+    }
+    .role {
+      margin-bottom: 10px;
+      background: #f0f0f0;
+      padding: 15px;
+      border-radius: 8px;
+      transition: all 0.3s;
+    }
+    .role:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .achievement {
+      margin: 10px 0;
+      padding: 10px;
+      background: #f5f5f5;
+      border-radius: 6px;
+      border-left: 4px solid #ddd;
+    }
+    .achievement.completed {
+      border-left-color: #6aa84f;
+      background: #eaf7e6;
+    }
+    .progress-bar {
+      height: 10px;
+      background: #e0e0e0;
+      border-radius: 5px;
+      margin-top: 5px;
+      overflow: hidden;
+    }
+    .progress {
+      height: 100%;
+      background: #6aa84f;
+      width: 0%;
+      transition: width 0.5s;
+    }
+    .calendar-navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      align-items: center;
+    }
+    .calendar-title {
+      font-weight: bold;
+    }
+    .calendar-details {
+      margin-top: 15px;
+      padding: 15px;
+      background: #f0f0f0;
+      border-radius: 8px;
+      min-height: 50px;
+    }
+    .calendar-detail-item {
+      margin-bottom: 10px;
+    }
+    .edit-btn {
+      background: #6aa84f;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 3px 8px;
+      margin-left: 10px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: #f00;
+      opacity: 0;
+      animation: confetti 5s ease-in-out;
+      z-index: 1000;
+    }
+    @keyframes confetti {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(1000px) rotate(720deg);
+        opacity: 0;
+      }
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      max-width: 80%;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    .modal h2 {
+      color: #6aa84f;
+      margin-bottom: 15px;
+    }
+    .close-modal {
+      margin-top: 20px;
+      padding: 8px 20px;
+      background: #6aa84f;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .role-journal {
+      margin-top: 15px;
+    }
+    .journal-textarea {
+      width: 100%;
+      height: 100px;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+    .save-journal {
+      background: #6aa84f;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 8px 15px;
+      cursor: pointer;
+    }
+    .journal-entry {
+      background: #f9f9f9;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border-left: 3px solid #6aa84f;
+    }
+    .journal-date {
+      font-size: 12px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="section" id="daily-tasks">
+    <h2>🎯 日常任务（今日总分：<span id="total-score">0</span>/100）</h2>
+    <div id="tasks-container"></div>
+    
+    <h2>🏆 成就系统</h2>
+    <div id="achievements-container"></div>
+  </div>
+
+  <div class="section" id="training-calendar">
+    <div class="calendar-navigation">
+      <button id="prev-month">← 上个月</button>
+      <div class="calendar-title" id="calendar-title"></div>
+      <button id="next-month">下个月 →</button>
+    </div>
+    <div class="calendar" id="calendar"></div>
+    <div class="calendar-details" id="calendar-details">
+      <p>点击日期查看详情</p>
+    </div>
+  </div>
+
+  <div class="section" id="roleplay-mode">
+    <h2>🎭 今日角色扮演</h2>
+    <div id="role-container"></div>
+    <div class="role-journal">
+      <h3>角色扮演日志</h3>
+      <textarea class="journal-textarea" id="role-journal-text" placeholder="记录今天的角色扮演体验..."></textarea>
+      <button class="save-journal" id="save-journal-btn">保存日志</button>
+      <div id="journal-entries"></div>
+    </div>
+  </div>
+
+  <div class="modal" id="completion-modal">
+    <div class="modal-content">
+      <h2>🎉 任务完成！</h2>
+      <p>恭喜你完成了今日的所有任务！继续保持！</p>
+      <button class="close-modal" onclick="document.getElementById('completion-modal').style.display='none'">关闭</button>
+    </div>
+  </div>
+
+  <script>
+    // ------------------------ 任务库与抽取 ------------------------
+    const taskPool = {
+      10: [
+        "做10分钟冥想", "喝足8杯水", "整理房间10分钟", "阅读10页书", "写3条感恩清单", 
+        "站立工作30分钟", "清理1个杂物区", "做10分钟伸展运动", "记录今日饮食", 
+        "学习10个新单词", "给植物浇水", "整理电脑桌面", "清理手机无用照片",
+        "练习10分钟书法", "听一首新歌并记录感受", "给家人发问候信息",
+        "记录3件开心小事", "整理衣柜10分钟", "学习一个生活小技巧"
+      ],
+      20: [
+        "完成一次力量训练", "深度工作1小时", "学习新知识30分钟", "准备健康三餐", 
+        "整理邮件和日程", "完成30分钟有氧运动", "学习一项新技能1小时", 
+        "写一篇500字文章", "完成一项家务大扫除", "规划下周目标", 
+        "研究一个新话题", "完成一个创意项目", "练习乐器30分钟", 
+        "制作健康零食", "整理财务记录", "学习烹饪一道新菜",
+        "完成一项DIY项目", "练习演讲或表达30分钟", "完成一项志愿者工作"
+      ],
+      30: [
+        "完成一项重要任务", "制定本周计划并复盘", "记录并反思1个情绪波动",
+        "完成一个长期项目阶段", "解决一个棘手问题", "进行深度自我反思",
+        "完成职业发展规划", "建立一个新的健康习惯", "完成一项重大决策",
+        "帮助他人解决一个重要问题", "完成一项创意作品", "突破一个个人极限",
+        "完成一项学习挑战", "建立一个新的社交关系", "完成一项财务规划"
+      ],
+      40: [
+        "完成一个里程碑目标", "突破一个长期障碍", "实现一个重要人生目标",
+        "完成一项重大创作", "解决一个复杂问题", "完成一项长期学习计划"
+      ]
+    };
+
+    // 获取今天的日期字符串（用于确定每日固定任务）
+    function getTodayKey() {
+      const today = new Date();
+      return `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
+    }
+
+    // 从本地存储获取或生成今日任务
+    function getDailyTasks() {
+      const todayKey = getTodayKey();
+      const savedTasks = localStorage.getItem('dailyTasks');
+      
+      if (savedTasks) {
+        const parsed = JSON.parse(savedTasks);
+        if (parsed.date === todayKey) {
+          return parsed.tasks;
+        }
+      }
+      
+      // 生成新任务
+      const tasks = generateRandomTasks();
+      localStorage.setItem('dailyTasks', JSON.stringify({
+        date: todayKey,
+        tasks: tasks
+      }));
+      return tasks;
+    }
+
+    // 生成随机任务
+    function generateRandomTasks() {
+      const result = [];
+      const used = new Set();
+
+      function pickRandom(arr) {
+        let choice;
+        do {
+          choice = arr[Math.floor(Math.random() * arr.length)];
+        } while (used.has(choice));
+        used.add(choice);
+        return choice;
+      }
+
+      const tasks10 = Array.from({length: 3}, () => pickRandom(taskPool[10]));
+      const tasks20 = Array.from({length: 2}, () => pickRandom(taskPool[20]));
+      const tasks30 = [pickRandom(taskPool[30])];
+      return [
+        ...tasks10.map(t => ({ desc: t, points: 10, completed: false })),
+        ...tasks20.map(t => ({ desc: t, points: 20, completed: false })),
+        ...tasks30.map(t => ({ desc: t, points: 30, completed: false }))
+      ];
+    }
+
+    // 渲染任务列表
+    function renderTasks() {
+      const tasks = getDailyTasks();
+      const container = document.getElementById("tasks-container");
+      container.innerHTML = '';
+      
+      let totalScore = 0;
+      let completedTasks = 0;
+
+      tasks.forEach(task => {
+        const div = document.createElement("div");
+        div.className = `task ${task.completed ? 'completed' : ''}`;
+        div.innerHTML = `
+          <label style="display: flex; align-items: center; cursor: pointer;">
+            <input type="checkbox" ${task.completed ? 'checked' : ''} 
+              onchange="updateTaskCompletion(${task.points}, this, '${task.desc.replace(/'/g, "\\'")}')" 
+              style="margin-right: 10px;">
+            <span>${task.desc}（${task.points}分）</span>
+          </label>
+        `;
+        container.appendChild(div);
+        
+        if (task.completed) {
+          totalScore += task.points;
+          completedTasks++;
+        }
+      });
+      
+      document.getElementById("total-score").innerText = totalScore;
+      
+      // 检查是否完成所有任务
+      if (completedTasks === tasks.length && tasks.length > 0) {
+        celebrateCompletion();
+      }
+    }
+
+    // 更新任务完成状态
+    function updateTaskCompletion(points, checkbox, desc) {
+      const todayKey = getTodayKey();
+      const saved = JSON.parse(localStorage.getItem('dailyTasks'));
+      const tasks = saved.tasks;
+      
+      const taskIndex = tasks.findIndex(t => t.desc === desc);
+      if (taskIndex !== -1) {
+        tasks[taskIndex].completed = checkbox.checked;
+        localStorage.setItem('dailyTasks', JSON.stringify({
+          date: todayKey,
+          tasks: tasks
+        }));
+      }
+      
+      // 重新渲染以更新总分
+      renderTasks();
+      
+      // 更新成就进度
+      if (checkbox.checked) {
+        updateAchievementProgress(desc);
+      }
+    }
+
+    function celebrateCompletion() {
+      // 显示模态框
+      document.getElementById('completion-modal').style.display = 'flex';
+      
+      // 创建礼花效果
+      for (let i = 0; i < 100; i++) {
+        createConfetti();
+      }
+    }
+
+    function createConfetti() {
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+      confetti.style.width = Math.random() * 10 + 5 + 'px';
+      confetti.style.height = Math.random() * 10 + 5 + 'px';
+      document.body.appendChild(confetti);
+      
+      // 移除元素
+      setTimeout(() => {
+        confetti.remove();
+      }, 5000);
+    }
+
+    // ------------------------ 成就系统 ------------------------
+    const achievements = [
+      { id: 'meditation', name: "冥想大师", description: "完成冥想任务20次", target: 20, progress: 0 },
+      { id: 'water', name: "水润人生", description: "完成喝水任务30次", target: 30, progress: 0 },
+      { id: 'reading', name: "书虫", description: "完成阅读任务50次", target: 50, progress: 0 },
+      { id: 'cleaning', name: "整洁达人", description: "完成整理任务30次", target: 30, progress: 0 },
+      { id: 'workout', name: "健身狂人", description: "完成力量训练任务30次", target: 30, progress: 0 },
+      { id: 'deep-work', name: "深度工作者", description: "完成深度工作任务50次", target: 50, progress: 0 },
+      { id: 'planning', name: "计划大师", description: "完成计划任务30次", target: 30, progress: 0 },
+      { id: 'gratitude', name: "感恩之心", description: "完成感恩清单任务50次", target: 50, progress: 0 },
+      { id: 'streak-3', name: "三日连胜", description: "连续3天完成所有任务", target: 3, progress: 0, isStreak: true },
+      { id: 'streak-7', name: "一周连胜", description: "连续7天完成所有任务", target: 7, progress: 0, isStreak: true },
+      { id: 'streak-30', name: "月冠军", description: "连续30天完成所有任务", target: 30, progress: 0, isStreak: true },
+      { id: 'perfect-day', name: "完美日", description: "一天内完成所有任务", target: 10, progress: 0 },
+      { id: 'creative', name: "创意先锋", description: "完成创意任务20次", target: 20, progress: 0 },
+      { id: 'learner', name: "终身学习者", description: "完成学习任务50次", target: 50, progress: 0 },
+      { id: 'health', name: "健康卫士", description: "完成健康相关任务100次", target: 100, progress: 0 },
+      { id: 'organizer', name: "组织专家", description: "完成整理规划任务50次", target: 50, progress: 0 },
+      { id: 'social', name: "社交达人", description: "完成社交相关任务30次", target: 30, progress: 0 },
+      { id: 'artist', name: "艺术灵魂", description: "完成艺术创作任务20次", target: 20, progress: 0 },
+      { id: 'writer', name: "文字工作者", description: "完成写作任务30次", target: 30, progress: 0 },
+      { id: 'chef', name: "家庭厨师", description: "完成烹饪任务30次", target: 30, progress: 0 }
+    ];
+
+    // 从本地存储加载成就进度
+    function loadAchievements() {
+      const saved = localStorage.getItem('achievements');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        parsed.forEach(savedAchievement => {
+          const achievement = achievements.find(a => a.id === savedAchievement.id);
+          if (achievement) {
+            achievement.progress = savedAchievement.progress;
+          }
+        });
+      }
+    }
+
+    // 保存成就进度到本地存储
+    function saveAchievements() {
+      localStorage.setItem('achievements', JSON.stringify(achievements));
+    }
+
+    // 更新成就进度
+    function updateAchievementProgress(taskDesc) {
+      let updated = false;
+      
+      // 更新特定任务类型的成就
+      if (taskDesc.includes('冥想')) {
+        const achievement = achievements.find(a => a.id === 'meditation');
+        if (achievement && achievement.progress < achievement.target) {
+          achievement.progress++;
+          updated = true;
+        }
+      } else if (taskDesc.includes('水')) {
+        const achievement = achievements.find(a => a.id === 'water');
+        if (achievement && achievement.progress < achievement.target) {
+          achievement.progress++;
+          updated = true;
+        }
+      } else if (taskDesc.includes('阅读')) {
+        const achievement = achievements.find(a => a.id === 'reading');
+        if (achievement && achievement.progress < achievement.target) {
+          achievement.progress++;
+          updated = true;
+        }
+      } else if (taskDesc.includes('整理') || taskDesc.includes('清理')) {
+        const achievement = achievements.find(a => a.id === 'cleaning');
+        if (achievement && achievement.progress < achievement.target) {
+          achievement.progress++;
+          updated = true;
+        }
+      } else if (taskDesc.includes('力量训练') || taskDesc.includes('有氧运动')) {
+        const achievement = achievements.find(a => a.id === 'workout');
+        if (achievement && achievement.progress < achievement.target) {
+          achievement.progress++;
+          updated = true;
+        }
+      } else if (taskDesc.includes('深度工作')) {
+        const achievement = achievements.find(a => a.id === 'deep-work');
+        if (achievement && achievement.progress < achievement.target) {
+          achievement.progress++;
+          updated = true;
+        }
+      } else if (taskDesc.includes('计划') || taskDesc.includes('规划')) {
+        const achievement = achievements.find(a => a.id === 'planning');
+        if (achievement && achievement.progress < achievement.target) {
+          achievement.progress++;
+          updated = true;
+        }
+      } else if (taskDesc.includes('感恩')) {
+        const achievement = achievements.find(a => a.id === 'gratitude');
+        if (achievement && achievement.progress < achievement.target) {
+          achievement.progress++;
+          updated = true;
+        }
+      } else if (taskDesc.includes('创意') || taskDesc.includes('创作')) {
+        const achievement = achievements.find(a => a.id === 'creative');
+        if (achievement && achievement.progress < achievement.target) {
+          achievement.progress++;
+          updated = true;
+        }
+      } else if (taskDesc.includes('学习') || taskDesc.includes('知识')) {
+        const achievement = achievements.find(a => a.id === 'learner');
+        if (achievement && achievement.progress < achievement.target) {
+          achievement.progress++;
+          updated = true;
+        }
+      } else if (taskDesc.includes('健康') || taskDesc.includes('饮食')) {
+        const achievement = achievements.find(a => a.id === 'health');
+        if (achievement && achievement.progress < achievement.target) {
+          achievement.progress++;
+          updated = true;
+        }
+      } else if (taskDesc.includes('社交') || taskDesc.includes('家人')) {
+        const achievement = achievements.find(a => a.id === 'social');
+        if (achievement && achievement.progress < achievement.target) {
+          achievement.progress++;
+          updated = true;
+        }
+      } else if (taskDesc.includes('艺术') || taskDesc.includes('创作')) {
+        const achievement = achievements.find(a => a.id === 'artist');
+        if (achievement && achievement.progress < achievement.target) {
+          achievement.progress++;
+          updated = true;
+        }
+      } else if (taskDesc.includes('写作') || taskDesc.includes('文章')) {
+        const achievement = achievements.find(a => a.id === 'writer');
+        if (achievement && achievement.progress < achievement.target) {
+          achievement.progress++;
+          updated = true;
+        }
+      } else if (taskDesc.includes('烹饪') || taskDesc.includes('零食')) {
+        const achievement = achievements.find(a => a.id === 'chef');
+        if (achievement && achievement.progress < achievement.target) {
+          achievement.progress++;
+          updated = true;
+        }
+      }
+      
+      // 检查是否完成所有任务（完美日成就）
+      const savedTasks = JSON.parse(localStorage.getItem('dailyTasks'));
+      if (savedTasks && savedTasks.tasks.every(t => t.completed)) {
+        const achievement = achievements.find(a => a.id === 'perfect-day');
+        if (achievement && achievement.progress < achievement.target) {
+          achievement.progress++;
+          updated = true;
+        }
+      }
+      
+      if (updated) {
+        renderAchievements();
+        saveAchievements();
+      }
+    }
+
+    // 渲染成就
+    function renderAchievements() {
+      const container = document.getElementById('achievements-container');
+      container.innerHTML = '';
+      
+      achievements.forEach(achievement => {
+        const div = document.createElement('div');
+        div.className = `achievement ${achievement.progress >= achievement.target ? 'completed' : ''}`;
+        
+        const progressPercent = Math.min(100, (achievement.progress / achievement.target) * 100);
+        
+        div.innerHTML = `
+          <strong>${achievement.name}</strong>
+          <p>${achievement.description}</p>
+          <div class="progress-bar">
+            <div class="progress" style="width: ${progressPercent}%"></div>
+          </div>
+          <small>${achievement.progress}/${achievement.target}</small>
+        `;
+        
+        container.appendChild(div);
+      });
+    }
+
+    // 初始化成就系统
+    loadAchievements();
+    renderAchievements();
+
+    // ------------------------ 日历训练打卡 ------------------------
+    let currentDate = new Date();
+    const calendar = document.getElementById('calendar');
+    const calendarTitle = document.getElementById('calendar-title');
+    const calendarDetails = document.getElementById('calendar-details');
+
+    // 从本地存储加载日历数据
+    function loadCalendarData() {
+      const saved = localStorage.getItem('calendarData');
+      return saved ? JSON.parse(saved) : {};
+    }
+
+    // 保存日历数据到本地存储
+    function saveCalendarData(data) {
+      localStorage.setItem('calendarData', JSON.stringify(data));
+    }
+
+    // 渲染日历
+    function renderCalendar() {
+      calendar.innerHTML = '';
+      
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth();
+      
+      calendarTitle.textContent = `${year}年 ${month + 1}月`;
+      
+      const firstDay = new Date(year, month, 1);
+      const lastDay = new Date(year, month + 1, 0);
+      const daysInMonth = lastDay.getDate();
+      const firstDayOfWeek = firstDay.getDay();
+      
+      // 创建日历标题（星期）
+      const weekdays = ['日', '一', '二', '三', '四', '五', '六'];
+      for (let i = 0; i < 7; i++) {
+        const dayHeader = document.createElement('div');
+        dayHeader.textContent = weekdays[i];
+        dayHeader.style.fontWeight = 'bold';
+        calendar.appendChild(dayHeader);
+      }
+      
+      // 填充空白格子
+      for (let i = 0; i < firstDayOfWeek; i++) {
+        const emptyDiv = document.createElement('div');
+        emptyDiv.className = 'calendar-day empty';
+        calendar.appendChild(emptyDiv);
+      }
+      
+      // 填充当前月的日期
+      const calendarData = loadCalendarData();
+      const monthKey = `${year}-${month + 1}`;
+      
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dayDiv = document.createElement('div');
+        dayDiv.className = 'calendar-day';
+        dayDiv.textContent = day;
+        
+        const dateKey = `${monthKey}-${day}`;
+        if (calendarData[dateKey]) {
+          dayDiv.classList.add(calendarData[dateKey].status);
+          dayDiv.title = calendarData[dateKey].note;
+        }
+        
+        dayDiv.onclick = () => showCalendarDetails(dateKey);
+        calendar.appendChild(dayDiv);
+      }
+    }
+
+    // 显示日历日期的详细信息
+    function showCalendarDetails(dateKey) {
+      const calendarData = loadCalendarData();
+      const details = calendarData[dateKey];
+      
+      if (details) {
+        let statusText = '';
+        switch (details.status) {
+          case 'completed': statusText = '锻炼完成'; break;
+          case 'not-completed': statusText = '锻炼未完成'; break;
+          case 'rest-day': statusText = '休息日'; break;
+          case 'sick': statusText = '生病'; break;
+          case 'travel': statusText = '外出'; break;
+          default: statusText = '未设置';
+        }
+        
+        calendarDetails.innerHTML = `
+          <div class="calendar-detail-item">
+            <strong>${dateKey}</strong>
+            <button class="edit-btn" onclick="editCalendarDay('${dateKey}')">修改</button>
+          </div>
+          <div class="calendar-detail-item">
+            <strong>状态:</strong> ${statusText}
+          </div>
+          <div class="calendar-detail-item">
+            <strong>备注:</strong> ${details.note}
+          </div>
+        `;
+      } else {
+        calendarDetails.innerHTML = `
+          <p>${dateKey} 无记录</p>
+          <button class="edit-btn" onclick="editCalendarDay('${dateKey}')">添加</button>
+        `;
+      }
+    }
+
+    // 编辑日历日期
+    function editCalendarDay(dateKey) {
+      const calendarData = loadCalendarData();
+      const existingData = calendarData[dateKey] || {};
+      
+      const statusOptions = [
+        { value: 'completed', label: '锻炼完成', color: '绿色' },
+        { value: 'not-completed', label: '锻炼未完成', color: '红色' },
+        { value: 'rest-day', label: '休息日', color: '蓝色' },
+        { value: 'sick', label: '生病', color: '橙色' },
+        { value: 'travel', label: '外出', color: '紫色' }
+      ];
+      
+      const note = prompt("请输入今日备注:", existingData.note || '');
+      if (note === null) return;
+      
+      const status = prompt(
+        "选择状态:\n1. 锻炼完成 (绿色)\n2. 锻炼未完成 (红色)\n3. 休息日 (蓝色)\n4. 生病 (橙色)\n5. 外出 (紫色)", 
+        existingData.status ? 
+          statusOptions.findIndex(opt => opt.value === existingData.status) + 1 : "1"
+      );
+      
+      if (status === null) return;
+      
+      let selectedStatus = '';
+      switch (status) {
+        case '1': selectedStatus = 'completed'; break;
+        case '2': selectedStatus = 'not-completed'; break;
+        case '3': selectedStatus = 'rest-day'; break;
+        case '4': selectedStatus = 'sick'; break;
+        case '5': selectedStatus = 'travel'; break;
+        default: selectedStatus = '';
+      }
+      
+      calendarData[dateKey] = {
+        status: selectedStatus,
+        note: note
+      };
+      saveCalendarData(calendarData);
+      
+      // 重新渲染日历和详情
+      renderCalendar();
+      showCalendarDetails(dateKey);
+    }
+
+    // 初始化日历导航按钮
+    document.getElementById('prev-month').addEventListener('click', () => {
+      currentDate.setMonth(currentDate.getMonth() - 1);
+      renderCalendar();
+      calendarDetails.innerHTML = '<p>点击日期查看详情</p>';
+    });
+
+    document.getElementById('next-month').addEventListener('click', () => {
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      renderCalendar();
+      calendarDetails.innerHTML = '<p>点击日期查看详情</p>';
+    });
+
+    // 初始化日历
+    renderCalendar();
+
+    // ------------------------ 角色扮演随机 ------------------------
+    const roles = [
+      { 
+        name: "游侠", 
+        desc: "自由而孤独，适合挑战未知任务。具体行动：尝试一条新的通勤路线，午餐时探索一家新餐厅，完成一项平时不会做的任务。记录下这些新体验的感受。" 
+      },
+      { 
+        name: "炼金术士", 
+        desc: "热衷尝试和反思，每日学习或实验新事物。具体行动：学习一个新概念或技能，尝试一种新的工作方法，晚上记录实验成果和反思。可以尝试调配一杯新的健康饮品作为象征。" 
+      },
+      { 
+        name: "武僧", 
+        desc: "内敛自律，专注呼吸、打坐、锻炼。具体行动：每小时做1分钟深呼吸练习，午餐后静坐5分钟，工作保持端正姿势，晚上进行拉伸或瑜伽。保持饮食简单健康。" 
+      },
+      { 
+        name: "赏金猎人", 
+        desc: "目标明确，击破清单任务获取高分。具体行动：将任务视为悬赏目标，完成后给自己积分奖励。可以设定一个最终奖励（如看一集喜欢的节目），当积分达到一定数量时兑换。" 
+      },
+      { 
+        name: "街头诗人", 
+        desc: "记录情绪、书写文字、表达自我。具体行动：随身携带小本子记录观察和感受，将任务完成过程写成小故事，用诗意的语言描述日常事物。可以录制一段语音日记。" 
+      },
+      { 
+        name: "未来特工", 
+        desc: "执行高强度任务、时间管理高手。具体行动：使用番茄工作法（25分钟专注+5分钟休息），将任务视为机密任务，完成后划掉清单。佩戴一个象征性的通讯器（如智能手表）提醒自己。" 
+      },
+      { 
+        name: "森林德鲁伊", 
+        desc: "与自然亲近，适合冥想、园艺、散步。具体行动：在户外吃午餐，工作时摆放植物，使用自然声音背景音乐，下班后公园散步。记录观察到的自然细节。" 
+      },
+      { 
+        name: "黑客", 
+        desc: "钻研技巧、技能精进、静默完成目标。具体行动：优化工作流程如快捷键使用，学习一个效率工具技巧，任务完成后不留痕迹（快速清理工作区）。可以穿全黑服装增加代入感。" 
+      },
+      { 
+        name: "宫廷厨师", 
+        desc: "精心准备每一餐，注重营养搭配。具体行动：提前规划三餐，尝试新食谱，用心摆盘，细嚼慢咽享受食物。记录每餐的营养成分和烹饪心得。" 
+      },
+      { 
+        name: "考古学家", 
+        desc: "挖掘深度，研究细节。具体行动：选择一个主题深入研究，做详细笔记，建立知识关联。整理电脑文件或书架如同整理考古发现。记录一天的知识收获。" 
+      },
+      { 
+        name: "时间旅行者", 
+        desc: "珍惜当下，规划未来。具体行动：早晨写下给晚上自己的提醒，晚上给明天早晨的自己留言。记录一天中希望重来或保存的时刻。思考如果来自未来，会给现在的自己什么建议。" 
+      },
+      { 
+        name: "侦探", 
+        desc: "观察细节，寻找线索。具体行动：记录一天中的异常现象或有趣细节，对常规事务提出质疑，寻找任务间的关联线索。晚上整理案件报告（日记）。" 
+      },
+      { 
+        name: "船长", 
+        desc: "掌控方向，带领团队（或自己）。具体行动：早晨规划航线（日程），应对突发风暴（干扰），记录航海日志（日记）。可以将工作区布置为驾驶舱，使用航海术语。" 
+      },
+      { 
+        name: "艺术家", 
+        desc: "创意表达，审美体验。具体行动：用创意方式完成任务（如用画画做笔记），布置美观的工作环境，记录色彩和形状的观察。将日常活动视为行为艺术。" 
+      },
+      { 
+        name: "科学家", 
+        desc: "实验精神，数据驱动。具体行动：为任务设定假设（如早上效率更高），收集数据验证，记录实验结果。可以穿白大褂或佩戴护目镜增加趣味性。" 
+      },
+      { 
+        name: "忍者", 
+        desc: "隐秘行动，高效完成。具体行动：悄无声息地完成任务，不引起注意（减少社交媒体），训练专注力（如冥想）。可以设定潜入和撤离时间（开始和结束工作）。" 
+      }
+    ];
+
+    // 从本地存储加载角色
+    function loadSelectedRole() {
+      const today = new Date().toDateString();
+      const saved = localStorage.getItem('selectedRole');
+      
+      if (saved) {
+        const { date, role } = JSON.parse(saved);
+        if (date === today) {
+          return role;
+        }
+      }
+      return null;
+    }
+
+    // 保存角色到本地存储
+    function saveSelectedRole(role) {
+      const today = new Date().toDateString();
+      localStorage.setItem('selectedRole', JSON.stringify({ date: today, role }));
+    }
+
+    // 渲染角色
+    function renderRole() {
+      const roleContainer = document.getElementById('role-container');
+      roleContainer.innerHTML = '';
+      
+      const savedRole = loadSelectedRole();
+      const role = savedRole || pickRole();
+      
+      if (!savedRole && role) {
+        saveSelectedRole(role);
+      }
+      
+      if (role) {
+        const div = document.createElement('div');
+        div.className = 'role';
+        div.innerHTML = `
+          <h3>${role.name}</h3>
+          <p>${role.desc}</p>
+          <small>提示：尝试完全代入这个角色思考和行为，晚上记录角色扮演体验。</small>
+        `;
+        roleContainer.appendChild(div);
+      }
+    }
+
+    // 随机选择角色
+    function pickRole() {
+      const index = Math.floor(Math.random() * roles.length);
+      return roles[index];
+    }
+
+    // 加载角色扮演日志
+    function loadRoleJournal() {
+      const saved = localStorage.getItem('roleJournal') || '[]';
+      return JSON.parse(saved);
+    }
+
+    // 保存角色扮演日志
+    function saveRoleJournal(journal) {
+      localStorage.setItem('roleJournal', JSON.stringify(journal));
+    }
+
+    // 渲染角色扮演日志
+    function renderRoleJournal() {
+      const journalEntries = loadRoleJournal();
+      const container = document.getElementById('journal-entries');
+      container.innerHTML = '';
+      
+      journalEntries.forEach(entry => {
+        const div = document.createElement('div');
+        div.className = 'journal-entry';
+        div.innerHTML = `
+          <div class="journal-date">${entry.date}</div>
+          <p>${entry.text}</p>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // 保存新日志
+    document.getElementById('save-journal-btn').addEventListener('click', () => {
+      const text = document.getElementById('role-journal-text').value.trim();
+      if (text) {
+        const journal = loadRoleJournal();
+        const today = new Date();
+        const dateStr = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()} ${today.getHours()}:${today.getMinutes()}`;
+        
+        journal.unshift({
+          date: dateStr,
+          text: text
+        });
+        
+        saveRoleJournal(journal);
+        document.getElementById('role-journal-text').value = '';
+        renderRoleJournal();
+      }
+    });
+
+    // 初始化角色扮演系统
+    renderRole();
+    renderRoleJournal();
+
+    // 初始化任务系统
+    renderTasks();
+  </script>
+</body>
+</html>
